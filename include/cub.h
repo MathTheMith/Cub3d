@@ -65,12 +65,13 @@ typedef struct s_ray
 }   t_ray;
 
 int key_hook(int keycode, t_data *data);
-void put_pixel(char *data, int line_len, int bpp, int x, int y, int color);
-void draw_line(char *data, int line_len, int bpp, int x0, int y0, int x1, int y1, int color);
+void put_pixel(t_data *data,int x, int y, int color);
 void draw_wall(t_data *data, t_player *p);
-void draw_background(char *data, int line_len, int bpp, int width, int height);
+void draw_background(t_data *data,int width, int height);
 int **transfer_map(t_data *data);
 char	*get_next_line(int fd);
+void free_data_and_quit(t_data *data);
+void free_map(int **map);
 
 void init_struct(t_data *data);
 void init_window(t_data *data);
@@ -87,6 +88,7 @@ void rotate_plane(t_player *p, double rotSpeed);
 void rotate_left(t_data *data);
 void rotate_right(t_data *data);
 
+void draw_straight_line(t_data *data,int x0, int y0, int y1, int color);
 
 void parsing(int ac, char **av, t_data *data);
 void exit_program(t_data *data, t_error error);

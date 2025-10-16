@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/16 11:51:56 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/10/16 12:17:57 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int key_hook(int keycode, t_data *data)
 
 int loop_hook(t_data *data)
 {
-    draw_background(data->data, data->line_len, data->bpp, 1500, 1000);
+    draw_background(data, 1500, 1000);
     draw_wall(data, &data->p);
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
     return 0;
@@ -38,7 +38,7 @@ int loop_hook(t_data *data)
 int main(int ac, char **av)
 {
     t_data data;
-    
+
     parsing(ac, av, &data);
     init_struct(&data);
     init_window(&data);

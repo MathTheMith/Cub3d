@@ -105,9 +105,7 @@ void draw_wall_line(t_data *data, t_ray *ray, int x)
     color = 0xFF0000;
     if (ray->side == 1)
         color = 0x880000;
-    
-    draw_line(data->data, data->line_len, data->bpp, 
-        x, draw_start, x, draw_end, color);
+    draw_straight_line(data, x, draw_start, draw_end, color);
 }
 
 void draw_wall(t_data *data, t_player *p)
@@ -126,4 +124,5 @@ void draw_wall(t_data *data, t_player *p)
         draw_wall_line(data, &ray, x);
         x++;
     }
+    
 }

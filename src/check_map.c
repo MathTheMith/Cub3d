@@ -46,11 +46,12 @@ t_map_size get_map_size(int fd)
     return (size);
 }
 
-int **allocate_map(t_map_size size)
+int **allocate_map(t_map_size size, t_data *data)
 {
     int **map;
     int i;
 
+    (void)data;
     map = ft_calloc(size.height, sizeof(int *));
     if (!map)
         return (NULL);
@@ -59,7 +60,10 @@ int **allocate_map(t_map_size size)
     {
         map[i] = ft_calloc(size.width - 1, sizeof(int));
         if (!map[i])
-            return (NULL);
+        {
+            free_map(map);
+            exit(0);
+        }
         i++;
     }
     return (map);
@@ -111,7 +115,7 @@ int **fill_map(int fd, t_map_size size, t_data *data)
     char *line;
     int i;
 
-    map = allocate_map(size);
+    map = allocate_map(size, data);
     if (!map)
         return (NULL);
     i = 0;
@@ -132,13 +136,9 @@ int **transfer_map(t_data *data)
     int **map;
 
     fd = open_map_file();
-    if (fd < 0)
-        return (NULL);
     size = get_map_size(fd);
     close(fd);
     fd = open_map_file();
-    if (fd < 0)
-        return (NULL);
     map = fill_map(fd, size, data);
     close(fd);
     return (map);

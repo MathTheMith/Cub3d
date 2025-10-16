@@ -25,6 +25,7 @@ SRC_FILES = main.c \
 			check_map.c \
 			move.c \
 			init.c \
+			free.c \
 			set_player_direction.c \
 			get_next_line/get_next_line.c \
 			get_next_line/get_next_line_utils.c \
