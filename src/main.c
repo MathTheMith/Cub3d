@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/15 23:30:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/16 11:51:56 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ int loop_hook(t_data *data)
     return 0;
 }
 
-int main(void)
+int main(int ac, char **av)
 {
     t_data data;
-
+    
+    parsing(ac, av, &data);
     init_struct(&data);
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);

@@ -8,6 +8,14 @@
 #include <math.h>
 #include <fcntl.h>
 
+typedef enum e_error
+{
+    No_error,
+    E_malloc,
+    E_nbarg,
+    E_ext
+}           t_error;
+
 typedef struct s_player
 {
 	double p_x;
@@ -79,6 +87,11 @@ void rotate_plane(t_player *p, double rotSpeed);
 void rotate_left(t_data *data);
 void rotate_right(t_data *data);
 
+
+void parsing(int ac, char **av, t_data *data);
+void exit_program(t_data *data, t_error error);
+void free_all(t_data *data);
+void print_error(t_error error);
 
 
 #endif
