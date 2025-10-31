@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/15 23:30:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/31 14:58:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int loop_hook(t_data *data)
     return 0;
 }
 
-int main(void)
+int main(int ac, char **av)
 {
     t_data data;
-
-    init_struct(&data);
+    
+    parsing(ac, av, &data);
+    init_struct(&data, av[1]);
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_loop_hook(data.mlx, loop_hook, &data);

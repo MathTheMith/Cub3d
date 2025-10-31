@@ -22,12 +22,19 @@ OBJ_DIR = build
 SRC_FILES = main.c \
 			draw.c \
 			raycasting.c \
-			check_map.c \
+			fill_map.c \
 			move.c \
 			init.c \
 			set_player_direction.c \
 			get_next_line/get_next_line.c \
 			get_next_line/get_next_line_utils.c \
+			\
+			parsing/parsing.c \
+			\
+			exit/exit_program.c \
+			exit/free_all.c \
+			exit/print_error.c \
+
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:.c=.o))

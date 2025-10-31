@@ -12,11 +12,11 @@
 
 #include "cub.h"
 
-int open_map_file(void)
+int open_map_file(char *map_name)
 {
     int fd;
 
-    fd = open("map/map.cub", O_RDONLY);
+    fd = open(map_name, O_RDONLY);
     if (fd < 0)
     {
         perror("open");
@@ -125,18 +125,18 @@ int **fill_map(int fd, t_map_size size, t_data *data)
     return (map);
 }
 
-int **transfer_map(t_data *data)
+int **transfer_map(t_data *data, char *map_name)
 {
     int fd;
     t_map_size size;
     int **map;
 
-    fd = open_map_file();
+    fd = open_map_file(map_name);
     if (fd < 0)
         return (NULL);
     size = get_map_size(fd);
     close(fd);
-    fd = open_map_file();
+    fd = open_map_file(map_name);
     if (fd < 0)
         return (NULL);
     map = fill_map(fd, size, data);

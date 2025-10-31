@@ -12,9 +12,9 @@
 
 #include "cub.h"
 
-void init_struct(t_data *data)
+void init_struct(t_data *data, char *map_name)
 {
-    data->map = transfer_map(data);
+    data->map = transfer_map(data, map_name);
     data->x = 0;
 }
 

@@ -8,6 +8,15 @@
 #include <math.h>
 #include <fcntl.h>
 
+typedef enum e_error
+{
+    No_error,
+    E_malloc,
+    E_nbarg,
+    E_ext,
+    E_path
+}           t_error;
+
 typedef struct s_player
 {
 	double p_x;
@@ -61,10 +70,10 @@ void put_pixel(char *data, int line_len, int bpp, int x, int y, int color);
 void draw_line(char *data, int line_len, int bpp, int x0, int y0, int x1, int y1, int color);
 void draw_wall(t_data *data, t_player *p);
 void draw_background(char *data, int line_len, int bpp, int width, int height);
-int **transfer_map(t_data *data);
+int **transfer_map(t_data *data, char *map_name);
 char	*get_next_line(int fd);
 
-void init_struct(t_data *data);
+void init_struct(t_data *data, char *map_name);
 void init_window(t_data *data);
 
 void set_player_north(t_data *data, int i, int j);
@@ -79,6 +88,11 @@ void rotate_plane(t_player *p, double rotSpeed);
 void rotate_left(t_data *data);
 void rotate_right(t_data *data);
 
+
+void parsing(int ac, char **av, t_data *data);
+void exit_program(t_data *data, t_error error);
+void free_all(t_data *data);
+void print_error(t_error error);
 
 
 #endif
