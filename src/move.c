@@ -42,6 +42,36 @@ void move_backward(t_data *data)
     }
 }
 
+void move_left(t_data *data)
+{
+    double newX;
+    double newY;
+
+    newX = data->p.p_x + data->p.dir_y * 0.1;
+    newY = data->p.p_y - data->p.dir_x * 0.1;
+    
+    if (data->map[(int)newY][(int)newX] == 0)
+    {
+        data->p.p_x = newX;
+        data->p.p_y = newY;
+    }
+}
+
+void move_right(t_data *data)
+{
+    double newX;
+    double newY;
+
+    newX = data->p.p_x - data->p.dir_y * 0.1;
+    newY = data->p.p_y + data->p.dir_x * 0.1;
+    
+    if (data->map[(int)newY][(int)newX] == 0)
+    {
+        data->p.p_x = newX;
+        data->p.p_y = newY;
+    }
+}
+
 void rotate_direction(t_player *p, double rotSpeed)
 {
     double oldDirX;
@@ -77,4 +107,3 @@ void rotate_right(t_data *data)
     rotate_direction(&data->p, rotSpeed);
     rotate_plane(&data->p, rotSpeed);
 }
-

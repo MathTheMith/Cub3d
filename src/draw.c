@@ -12,17 +12,73 @@
 
 #include "cub.h"
 
-void put_pixel(char *data, int line_len, int bpp, int x, int y, int color)
+int create_rgb(int r, int g, int b)
+{
+    return (r << 16 | g << 8 | b);
+}
+
+void put_pixel(t_data *data, int x, int y, int color)
 {
     char *dst;
     
     if (x < 0 || x >= 1500 || y < 0 || y >= 1000)
         return;
-    dst = data + (y * line_len + x * (bpp / 8));
+    dst = data->data + (y * data->line_len + x * (data->bpp / 8));
     *(unsigned int *)dst = color;
 }
 
-void draw_background(char *data, int line_len, int bpp, int width, int height)
+void put_F_pixels(t_data *data, int x, int y)
+{
+    int RF;
+    int GF;
+    int BF;
+    int i;
+    //Do a check if it's rgb nb
+
+    RF = 0;
+    GF = 0;
+    BF = 0;
+    i = 0;
+
+    while (data->textures.F[i] != ',')
+    {
+        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        {
+            RF *= 10;
+            RF += data->textures.F[i] + '0';
+        }
+        else
+            put_pixel(data, x, y, create_rgb(0, 0, 0));
+        i++;
+    }
+    while (data->textures.F[i] != ',')
+    {
+        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        {
+            GF *= 10;
+            GF += data->textures.F[i] + '0';
+        }
+        else
+            put_pixel(data, x, y, create_rgb(0, 0, 0));
+        i++;
+    }
+    while (data->textures.F[i])
+    {
+        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        {
+            BF *= 10;
+            BF += data->textures.F[i] + '0';
+        }
+        else
+            put_pixel(data, x, y, create_rgb(0, 0, 0));
+        i++;
+    }
+    // printf("%d, %d, %d", RF, GF, BF);
+    put_pixel(data, x, y, create_rgb(RF, GF, BF));
+
+}
+
+void draw_background(t_data *data, int width, int height)
 {
     int x;
     int y;
@@ -33,7 +89,8 @@ void draw_background(char *data, int line_len, int bpp, int width, int height)
         x = 0;
         while (x < width)
         {
-            put_pixel(data, line_len, bpp, x, y, 0x87CEEB);
+            put_F_pixels(data, x, y);
+            // put_pixel(data, x, y, create_rgb(135, 206, 235));
             x++;
         }
         y++;
@@ -43,14 +100,14 @@ void draw_background(char *data, int line_len, int bpp, int width, int height)
         x = 0;
         while (x < width)
         {
-            put_pixel(data, line_len, bpp, x, y, 0xD3D3D3 );
+            put_pixel(data,x, y, create_rgb(211, 211, 211));
             x++;
         }
         y++;
     }
 }
 
-void draw_line(char *data, int line_len, int bpp, int x0, int y0, int x1, int y1, int color)
+void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 {
     int dx;
     int dy;
@@ -74,7 +131,7 @@ void draw_line(char *data, int line_len, int bpp, int x0, int y0, int x1, int y1
     err = dx - dy;
     while (1)
     {
-        put_pixel(data, line_len, bpp, x0, y0, color);
+        put_pixel(data, x0, y0, color);
         if (x0 == x1 && y0 == y1)
             break;
         e2 = 2 * err;

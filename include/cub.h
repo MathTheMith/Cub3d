@@ -27,6 +27,16 @@ typedef struct s_player
 	double plane_y;
 }	t_player;
 
+typedef struct s_textures
+{
+    char *NO;
+    char *SO;
+    char *WE;
+    char *EA;
+    char *F;
+    char *C;
+}   t_textures;
+
 typedef struct s_map_size
 {
     int width;
@@ -42,8 +52,8 @@ typedef struct s_data
     int     bpp;
     int     line_len;
     int     endian;
-    int     x;
 	int **map;
+    t_textures textures;
 	t_player p;
 	
 }   t_data;
@@ -66,14 +76,15 @@ typedef struct s_ray
 }   t_ray;
 
 int key_hook(int keycode, t_data *data);
-void put_pixel(char *data, int line_len, int bpp, int x, int y, int color);
-void draw_line(char *data, int line_len, int bpp, int x0, int y0, int x1, int y1, int color);
+void put_pixel(t_data *data, int x, int y, int color);
+void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 void draw_wall(t_data *data, t_player *p);
-void draw_background(char *data, int line_len, int bpp, int width, int height);
-int **transfer_map(t_data *data, char *map_name);
+void draw_background(t_data *data, int width, int height);
+int **transfer_map(t_data *data,t_map_size *size, char *map_name);
 char	*get_next_line(int fd);
+int open_map_file(char *map_name);
 
-void init_struct(t_data *data, char *map_name);
+void init_struct(t_data *data,t_map_size *size, char *map_name);
 void init_window(t_data *data);
 
 void set_player_north(t_data *data, int i, int j);
@@ -81,8 +92,13 @@ void set_player_south(t_data *data, int i, int j);
 void set_player_east(t_data *data, int i, int j);
 void set_player_west(t_data *data, int i, int j);
 
+int check_map(t_data *data, t_map_size *size);
+
+
 void move_forward(t_data *data);
 void move_backward(t_data *data);
+void move_left(t_data *data);
+void move_right(t_data *data); 
 void rotate_direction(t_player *p, double rotSpeed);
 void rotate_plane(t_player *p, double rotSpeed);
 void rotate_left(t_data *data);
