@@ -27,13 +27,12 @@ void put_pixel(t_data *data, int x, int y, int color)
     *(unsigned int *)dst = color;
 }
 
-void put_F_pixels(t_data *data, int x, int y)
+void put_c_pixels(t_data *data, int x, int y)
 {
     int RF;
     int GF;
     int BF;
     int i;
-    //Do a check if it's rgb nb
 
     RF = 0;
     GF = 0;
@@ -42,38 +41,45 @@ void put_F_pixels(t_data *data, int x, int y)
 
     while (data->textures.F[i] != ',')
     {
-        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        if (ft_isdigit(data->textures.F[i]))
         {
             RF *= 10;
-            RF += data->textures.F[i] + '0';
+            RF += data->textures.F[i] - '0';
         }
         else
             put_pixel(data, x, y, create_rgb(0, 0, 0));
         i++;
     }
+    i++;
     while (data->textures.F[i] != ',')
     {
-        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        if (ft_isdigit(data->textures.F[i]))
         {
             GF *= 10;
-            GF += data->textures.F[i] + '0';
+            GF += data->textures.F[i] - '0';
         }
         else
             put_pixel(data, x, y, create_rgb(0, 0, 0));
         i++;
     }
+    i++;
     while (data->textures.F[i])
     {
-        if (ft_isdigit(data->textures.F[i]) && i <= 3)
+        if (ft_isdigit(data->textures.F[i]))
         {
             BF *= 10;
-            BF += data->textures.F[i] + '0';
+            BF += data->textures.F[i] - '0';
         }
         else
             put_pixel(data, x, y, create_rgb(0, 0, 0));
         i++;
     }
-    // printf("%d, %d, %d", RF, GF, BF);
+    // DEBUG
+    static int q = 0;
+    if (q == 0)
+        printf("prout:%d, %d, %d\n", RF, GF, BF);
+    q++;
+    //
     put_pixel(data, x, y, create_rgb(RF, GF, BF));
 
 }
@@ -89,7 +95,7 @@ void draw_background(t_data *data, int width, int height)
         x = 0;
         while (x < width)
         {
-            put_F_pixels(data, x, y);
+            put_c_pixels(data, x, y);
             // put_pixel(data, x, y, create_rgb(135, 206, 235));
             x++;
         }
