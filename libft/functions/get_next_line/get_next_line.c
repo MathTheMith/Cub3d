@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:59:09 by math              #+#    #+#             */
-/*   Updated: 2025/10/15 18:57:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/11/17 15:44:58 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../../libft.h"
+
 
 char	*free_and_return_null(char **ptr1, char **ptr2)
 {

@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:50:09 by tfournie          #+#    #+#             */
-/*   Updated: 2025/10/15 11:39:41 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/17 15:19:04 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	**ft_split(char const *s, char c);
 char	*ft_strstr(const char *haystack, const char *needle);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*get_next_line(int fd);
 
 #endif

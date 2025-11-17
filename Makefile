@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/11/17 15:28:16 by tfournie          #+#    #+#              #
+#    Updated: 2025/11/17 15:28:16 by tfournie         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror -MMD -MP
 NAME = cub3D
@@ -22,15 +34,15 @@ OBJ_DIR = build
 SRC_FILES = main.c \
 			draw.c \
 			raycasting.c \
-			fill_map.c \
 			move.c \
-			init.c \
+			\
+			init/init_map.c \
+			init/init_player_direction.c \
+			init/init_map_utils.c \
+			init/init_textures.c \
+			init/init.c \
 			\
 			map_validation/check_map.c \
-			\
-			set_player_direction.c \
-			get_next_line/get_next_line.c \
-			get_next_line/get_next_line_utils.c \
 			\
 			parsing/parsing.c \
 			\
