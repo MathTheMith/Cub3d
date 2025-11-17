@@ -11,6 +11,7 @@
 typedef enum e_error
 {
     No_error,
+    Error,
     E_malloc,
     E_nbarg,
     E_ext,
@@ -80,11 +81,12 @@ void put_pixel(t_data *data, int x, int y, int color);
 void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 void draw_wall(t_data *data, t_player *p);
 void draw_background(t_data *data, int width, int height);
-int **transfer_map(t_data *data,t_map_size *size, char *map_name);
-char	*get_next_line(int fd);
-int open_map_file(char *map_name);
 
+int **init_map(t_data *data,t_map_size *size, char *map_name);
+int open_map_file(char *map_name);
 void init_struct(t_data *data,t_map_size *size, char *map_name);
+int **fill_map(int fd, t_map_size *size, t_data *data);
+void init_textures(t_data *data, char *map_name);
 void init_window(t_data *data);
 
 void set_player_north(t_data *data, int i, int j);
