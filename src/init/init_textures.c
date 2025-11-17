@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:02:21 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/17 15:14:17 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:00:25 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void init_textures(t_data *data, char *map_name)
     if (fd < 0)
         exit_program(data, Error);
     add_textures(data, fd);
+    init_c_colors(data);
     close(fd);
     return ;
 }

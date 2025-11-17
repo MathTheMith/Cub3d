@@ -44,6 +44,16 @@ typedef struct s_map_size
     int height;
 }   t_map_size;
 
+typedef struct s_colors
+{
+    int RF;
+    int GF;
+    int BF;
+    int RC;
+    int GC;
+    int BC;
+}   t_colors;
+
 typedef struct s_data
 {
     void    *mlx;
@@ -56,6 +66,7 @@ typedef struct s_data
 	int **map;
     t_textures textures;
 	t_player p;
+    t_colors colors;
 	
 }   t_data;
 
@@ -87,6 +98,7 @@ int open_map_file(char *map_name);
 void init_struct(t_data *data,t_map_size *size, char *map_name);
 int **fill_map(int fd, t_map_size *size, t_data *data);
 void init_textures(t_data *data, char *map_name);
+void init_c_colors(t_data *data);
 void init_window(t_data *data);
 
 void set_player_north(t_data *data, int i, int j);
