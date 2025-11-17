@@ -40,6 +40,7 @@ SRC_FILES = main.c \
 			init/init_player_direction.c \
 			init/init_map_utils.c \
 			init/init_textures.c \
+			init/init_colors.c \
 			init/init.c \
 			\
 			map_validation/check_map.c \

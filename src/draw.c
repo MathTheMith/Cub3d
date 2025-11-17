@@ -27,91 +27,30 @@ void put_pixel(t_data *data, int x, int y, int color)
     *(unsigned int *)dst = color;
 }
 
-void put_c_pixels(t_data *data, int x, int y)
-{
-    int RF;
-    int GF;
-    int BF;
-    int i;
-
-    RF = 0;
-    GF = 0;
-    BF = 0;
-    i = 0;
-
-    while (data->textures.F[i] != ',')
-    {
-        if (ft_isdigit(data->textures.F[i]))
-        {
-            RF *= 10;
-            RF += data->textures.F[i] - '0';
-        }
-        else
-            put_pixel(data, x, y, create_rgb(0, 0, 0));
-        i++;
-    }
-    i++;
-    while (data->textures.F[i] != ',')
-    {
-        if (ft_isdigit(data->textures.F[i]))
-        {
-            GF *= 10;
-            GF += data->textures.F[i] - '0';
-        }
-        else
-            put_pixel(data, x, y, create_rgb(0, 0, 0));
-        i++;
-    }
-    i++;
-    while (data->textures.F[i])
-    {
-        if (ft_isdigit(data->textures.F[i]))
-        {
-            BF *= 10;
-            BF += data->textures.F[i] - '0';
-        }
-        else
-            put_pixel(data, x, y, create_rgb(0, 0, 0));
-        i++;
-    }
-    // DEBUG
-    static int q = 0;
-    if (q == 0)
-        printf("prout:%d, %d, %d\n", RF, GF, BF);
-    q++;
-    //
-    put_pixel(data, x, y, create_rgb(RF, GF, BF));
-
-}
-
 void draw_background(t_data *data, int width, int height)
 {
     int x;
     int y;
-    
+    int color_f = create_rgb(data->colors.RF, data->colors.GF, data->colors.BF);
+    int color_c = create_rgb(data->colors.RC, data->colors.GC, data->colors.BC);
+
     y = 0;
     while (y < height / 2)
     {
-        x = 0;
-        while (x < width)
-        {
-            put_c_pixels(data, x, y);
-            // put_pixel(data, x, y, create_rgb(135, 206, 235));
-            x++;
-        }
+        x = -1;
+        while (++x < width)
+            put_pixel(data, x, y, color_f);
         y++;
     }
     while (y < height)
     {
-        x = 0;
-        while (x < width)
-        {
-            put_pixel(data,x, y, create_rgb(211, 211, 211));
-            x++;
-        }
+        x = -1;
+        while (++x < width)
+            put_pixel(data, x, y, color_c);
         y++;
     }
 }
+
 
 void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 {
