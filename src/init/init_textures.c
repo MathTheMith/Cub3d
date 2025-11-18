@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:02:21 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 17:26:40 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 19:12:35 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char *extract_path(char *line, int i)
     start = i;
     while (line[i] && line[i] != '\n')
         i++;
-    return ft_substr(line, start, i - start);
+    return (ft_substr(line, start, i - start));
 }
 
 void check_line(t_data *data, char *line)
@@ -102,7 +102,6 @@ void init_teximg(t_data *data, int i)
 
     x = 32;
     y = 32;
-
     if (i == 0)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.NO, &x, &y);
     else if (i == 1)
@@ -111,14 +110,10 @@ void init_teximg(t_data *data, int i)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.WE, &x, &y);
     else if (i == 3)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.EA, &x, &y);
-
     if (!data->teximg[i].img)
-        exit_program(data, E_path);
-
+        exit_program(data, E_tex);
     data->teximg[i].width = x;
     data->teximg[i].height = y;
-
-    // 👉 Récupération du tableau de pixels
     data->teximg[i].px = (unsigned int *)mlx_get_data_addr(
         data->teximg[i].img, 
         &data->teximg[i].bpp,
