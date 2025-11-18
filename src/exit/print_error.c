@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 11:09:06 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 19:10:40 by tfournie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub.h"
 
@@ -28,4 +18,7 @@ void print_error(t_error error)
         printf("Error\nType: E_mlx_win\nCreation of the window fail!\n");
     else if (error == E_tex)
         printf("Error\nType: E_tex\nThe textures of the wall is invalid(check the file or the path)!\n");
+    else if (error == E_map)
+        printf("Error\nType: E_map\nThe map isn't valid\n");
 }
+

@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 19:52:55 by tfournie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub.h"
 #include <X11/keysym.h>
@@ -43,7 +33,7 @@ int loop_hook(t_data *data)
     draw_background(data, 1500, 1000);
     draw_wall(data, &data->p);
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
+    printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
     return 0;
 }
 
@@ -59,7 +49,7 @@ int main(int ac, char **av)
     parsing(ac, av, &data);
     init_struct(&data, &map_size, av[1]);
     if (!check_map(&data, &map_size))
-        exit_program(&data, Error);
+        exit_program(&data, E_map);
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_hook(data.win, 17, 0, close_window, &data);

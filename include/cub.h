@@ -19,6 +19,7 @@ typedef enum e_error
     E_mlx_env,
     E_mlx_win,
     E_tex
+    E_map
 }           t_error;
 
 typedef struct s_player
@@ -33,74 +34,74 @@ typedef struct s_player
 
 typedef struct s_path_textures
 {
-    char *NO;
-    char *SO;
-    char *WE;
-    char *EA;
-    char *F;
-    char *C;
+	char *NO;
+	char *SO;
+	char *WE;
+	char *EA;
+	char *F;
+	char *C;
 }   t_path_textures;
 
 typedef struct s_teximg 
 { 
-    void *img; 
-    unsigned int *px; 
-    int width; 
-    int height;
-    int     bpp;
-    int     line_len;
-    int     endian;
+	void *img; 
+	unsigned int *px; 
+	int width; 
+	int height;
+	int     bpp;
+	int     line_len;
+	int     endian;
 } t_teximg;
 
 typedef struct s_map_size
 {
-    int width;
-    int height;
+	int width;
+	int height;
 }   t_map_size;
 
 typedef struct s_colors
 {
-    int RF;
-    int GF;
-    int BF;
-    int RC;
-    int GC;
-    int BC;
+	int RF;
+	int GF;
+	int BF;
+	int RC;
+	int GC;
+	int BC;
 }   t_colors;
 
 typedef struct s_data
 {
-    void    *mlx;
-    void    *win;
-    void    *img;
-    char    *data;
-    int     bpp;
-    int     line_len;
-    int     endian;
-	int     **map;
-    char    **cub_doc;
-    t_teximg teximg[4];
-    t_path_textures path_textures;
-	t_player p;
-    t_colors colors;
+	void    		*mlx;
+	void    		*win;
+	void    		*img;
+	char    		*data;
+	int     		bpp;
+	int     		line_len;
+	int     		endian;
+	int     		**map;
+	char    		**cub_doc;
+	t_teximg		teximg[4];
+	t_path_textures path_textures;
+	t_player 		p;
+	t_colors 		colors;
 	
 }   t_data;
 
 typedef struct s_ray
 {
-    double camera_x;
-    double dir_x;
-    double dir_y;
-    int map_x;
-    int map_y;
-    double delta_dist_x;
-    double delta_dist_y;
-    double side_dist_x;
-    double side_dist_y;
-    int step_x;
-    int step_y;
-    int side;
-    double perp_wall_dist;
+	double camera_x;
+	double dir_x;
+	double dir_y;
+	int map_x;
+	int map_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	double side_dist_x;
+	double side_dist_y;
+	int step_x;
+	int step_y;
+	int side;
+	double perp_wall_dist;
 }   t_ray;
 
 int key_hook(int keycode, t_data *data);
@@ -111,9 +112,10 @@ void draw_background(t_data *data, int width, int height);
 
 int **init_map(t_data *data,t_map_size *size);
 char **duplicate_map(t_data *data, t_map_size *size);
-void get_map_size(int fd, t_map_size *map_size);
+void get_doc_size(int fd, int *doc_height, int *doc_width);
 void	free_map(char **map);
-void copy_all_doc(t_data *data, char *map_name, t_map_size *map_size);
+int find_map_start(char **doc);
+void copy_all_doc(t_data *data, char *map_name, int *doc_height);
 void open_map_file(t_data *data, char *map_name, int *fd);
 void init_struct(t_data *data,t_map_size *size, char *map_name);
 int **fill_map(t_map_size *size, t_data *data);

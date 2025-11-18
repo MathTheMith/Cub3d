@@ -33,6 +33,24 @@ int flood_fill(char **map, int x, int y, t_map_size *size)
     return (1);
 }
 
+void print_map(char **map, t_map_size *map_size)
+{
+    int i = 0;
+    int j = 0;
+    printf("\n----- MAP -----\n");
+    while (i < map_size->height)
+    {
+        j = 0;
+        while(j < map_size->width)
+        {
+            printf("%c", map[i][j]);
+            j++;
+        }
+        printf("\n");
+        i++;
+    }
+    printf("---------------\n");
+}
 
 int check_map(t_data *data, t_map_size *size)
 {
@@ -42,8 +60,8 @@ int check_map(t_data *data, t_map_size *size)
     map_copy = duplicate_map(data, size);
     if (!map_copy)
         return (0);
+    print_map(map_copy, size);
     result = flood_fill(map_copy, (int)data->p.p_x, (int)data->p.p_y, size);
     free_map(map_copy);
-    
     return (result);
 }
