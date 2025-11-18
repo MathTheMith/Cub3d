@@ -12,41 +12,76 @@
 
 #include "cub.h"
 
-t_map_size get_map_size(int fd)
-{
-    t_map_size size;
-    char *line;
-    char tmp;
 
-    size.width = 0;
-    size.height = 0;
+void print_themap(t_data *data, t_map_size *map_size)
+{
+    int i = 0;
+
+    printf("----- MAP -----\n");
+    while (i < map_size->height && data->cub_doc[i])
+    {
+        printf("%s", data->cub_doc[i]);
+        i++;
+    }
+    printf("---------------\n");
+}
+
+void copy_all_doc(t_data *data, char *map_name, t_map_size *map_size)
+{
+    int fd;
+    int i;
+    char *line;
+
+    i = 0;
+    data->cub_doc = calloc(map_size->height + 1, sizeof(char *));
+    if (!data->cub_doc)
+        return;
+    open_map_file(data, map_name, &fd);
+    if (fd < 0)
+        return;
+    line = get_next_line(fd);
+    while (line && i < map_size->height)
+    {
+        data->cub_doc[i] = line;
+        i++;
+        line = get_next_line(fd);
+    }
+    data->cub_doc[i] = NULL;
+    close(fd);
+    print_themap(data, map_size);
+}
+
+void get_map_size(int fd, t_map_size *map_size)
+{
+    char *line;
+    int tmp;
+
+    map_size->width = 0;
+    map_size->height = 0;
     line = get_next_line(fd);
     while (line != NULL)
     {
         tmp = ft_strlen(line);
-        if (tmp > size.width)
-            size.width = tmp;
+        if (tmp > map_size->width)
+            map_size->width = tmp;
         free(line);
         line = get_next_line(fd);
-        size.height++;
+        map_size->height++;
     }
-    return (size);
 }
 
-int **init_map(t_data *data, t_map_size *size, char *map_name)
+int **init_map(t_data *data, t_map_size *map_size, char *map_name)
 {
     int fd;
     int **map;
 
-    fd = open_map_file(map_name);
+    open_map_file(data, map_name, &fd);
     if (fd < 0)
         return (NULL);
-    *size = get_map_size(fd);
+    get_map_size(fd, map_size);
     close(fd);
-    fd = open_map_file(map_name);
-    if (fd < 0)
-        return (NULL);
-    map = fill_map(fd, size, data);
-    close(fd);
+    copy_all_doc(data, map_name, map_size);
+    init_textures(data); 
+    map = fill_map(map_size, data);
     return (map);
 }

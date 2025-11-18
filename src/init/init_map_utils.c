@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:38:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/17 14:46:03 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 10:51:55 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int **allocate_map(t_map_size *size)
     return (map);
 }
 
-int **fill_map(int fd, t_map_size *size, t_data *data)
+int **fill_map(t_map_size *size, t_data *data)
 {
     int **map;
     char *line;
@@ -86,7 +86,7 @@ int **fill_map(int fd, t_map_size *size, t_data *data)
     i = 0;
     while (i < size->height)
     {
-        line = get_next_line(fd);
+        line = data->cub_doc[i];
         fill_map_line(line, map, data, i);
         free(line);
         i++;
