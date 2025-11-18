@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 16:10:04 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:12:18 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ int main(int ac, char **av)
     parsing(ac, av, &data);
     init_struct(&data, &map_size, av[1]);
     if (!check_map(&data, &map_size))
-    {
-        printf("Error\nMap validation failed");
-        return (1);
-    }
-    
+        exit_program(&data, Error);
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_hook(data.win, 17, 0, close_window, &data);
