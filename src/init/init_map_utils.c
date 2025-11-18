@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:38:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 10:51:55 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/18 15:35:47 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ int **fill_map(t_map_size *size, t_data *data)
     i = 0;
     while (i < size->height)
     {
-        line = data->cub_doc[i];
+        if (data->cub_doc[i][0] == '1')
+        {line = data->cub_doc[i];
         fill_map_line(line, map, data, i);
-        free(line);
+        free(line);}
         i++;
     }
     return (map);

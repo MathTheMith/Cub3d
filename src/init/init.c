@@ -27,9 +27,23 @@ void init_window(t_data *data)
     data->data = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
 }
 
+void transfer_cub_map(t_data *data, t_map_size *map_size, char *map_name)
+{
+    int fd;
+
+    open_map_file(data, map_name, &fd);
+    if (fd < 0)
+        exit_program(data, E_path);
+    get_map_size(fd, map_size);
+    copy_all_doc(data, map_name, map_size);
+    close(fd);
+}
+
 void init_struct(t_data *data, t_map_size *map_size, char *map_name)
 {
-    data->map = init_map(data, map_size, map_name);
+    transfer_cub_map(data, map_size, map_name);
+    init_textures(data);
+    data->map = init_map(data, map_size);
     if (data->map == NULL)
         exit_program(data, Error);
     printf("%s \n%s\n", data->textures.C, data->textures.F);
