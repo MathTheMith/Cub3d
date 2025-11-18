@@ -63,7 +63,8 @@ typedef struct s_data
     int     bpp;
     int     line_len;
     int     endian;
-	int **map;
+	int     **map;
+    char    **cub_doc;
     t_textures textures;
 	t_player p;
     t_colors colors;
@@ -94,10 +95,13 @@ void draw_wall(t_data *data, t_player *p);
 void draw_background(t_data *data, int width, int height);
 
 int **init_map(t_data *data,t_map_size *size, char *map_name);
-int open_map_file(char *map_name);
+char **duplicate_map(t_data *data, t_map_size *size);
+void	free_map(char **map);
+void copy_all_doc(t_data *data, char *map_name, t_map_size *map_size);
+void open_map_file(t_data *data, char *map_name, int *fd);
 void init_struct(t_data *data,t_map_size *size, char *map_name);
-int **fill_map(int fd, t_map_size *size, t_data *data);
-void init_textures(t_data *data, char *map_name);
+int **fill_map(t_map_size *size, t_data *data);
+void init_textures(t_data *data);
 void init_c_colors(t_data *data);
 void init_window(t_data *data);
 
@@ -123,6 +127,9 @@ void parsing(int ac, char **av, t_data *data);
 void exit_program(t_data *data, t_error error);
 void free_all(t_data *data);
 void print_error(t_error error);
+
+
+void print_themap(t_data *data, t_map_size *map_size);
 
 
 #endif

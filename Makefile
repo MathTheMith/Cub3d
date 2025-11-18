@@ -44,6 +44,7 @@ SRC_FILES = main.c \
 			init/init.c \
 			\
 			map_validation/check_map.c \
+			map_validation/check_map_utils.c \
 			\
 			parsing/parsing.c \
 			\

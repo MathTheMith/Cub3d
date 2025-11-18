@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:51:29 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/17 18:10:25 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 12:49:49 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void init_c_colors(t_data *data)
     data->colors.BF = parse_color_component(&s1);
 
     // DEBUG
-    static int q = 0;
-    if (q == 0)
-        printf("prout:%d, %d, %d\n",
-               data->colors.RF, data->colors.GF, data->colors.BF);
-    q++;
+    // static int q = 0;
+    // if (q == 0)
+    //     printf("prout:%d, %d, %d\n",
+    //            data->colors.RF, data->colors.GF, data->colors.BF);
+    // q++;
 }
 
