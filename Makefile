@@ -32,9 +32,10 @@ OBJ_DIR = build
 
 
 SRC_FILES = main.c \
-			draw.c \
-			raycasting.c \
-			move.c \
+			\
+			game/draw.c \
+			game/raycasting.c \
+			game/move.c \
 			\
 			init/init_map.c \
 			init/init_player_direction.c \
@@ -43,8 +44,8 @@ SRC_FILES = main.c \
 			init/init_colors.c \
 			init/init.c \
 			\
-			map_validation/check_map.c \
-			map_validation/check_map_utils.c \
+			check_map/check_map.c \
+			check_map/check_map_utils.c \
 			\
 			parsing/parsing.c \
 			\
