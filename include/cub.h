@@ -28,7 +28,7 @@ typedef struct s_player
 	double plane_y;
 }	t_player;
 
-typedef struct s_textures
+typedef struct s_path_textures
 {
     char *NO;
     char *SO;
@@ -36,7 +36,18 @@ typedef struct s_textures
     char *EA;
     char *F;
     char *C;
-}   t_textures;
+}   t_path_textures;
+
+typedef struct s_teximg 
+{ 
+    void *img; 
+    unsigned int *px; 
+    int width; 
+    int height;
+    int     bpp;
+    int     line_len;
+    int     endian;
+} t_teximg;
 
 typedef struct s_map_size
 {
@@ -65,7 +76,8 @@ typedef struct s_data
     int     endian;
 	int     **map;
     char    **cub_doc;
-    t_textures textures;
+    t_teximg teximg[4];
+    t_path_textures path_textures;
 	t_player p;
     t_colors colors;
 	

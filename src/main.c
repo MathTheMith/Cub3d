@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 13:53:59 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/18 16:10:04 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int main(int ac, char **av)
 {
     t_data data;
     t_map_size map_size;
+    
+    ft_memset(&data, 0, sizeof(t_data));
+    data.mlx = mlx_init();
     parsing(ac, av, &data);
     init_struct(&data, &map_size, av[1]);
     if (!check_map(&data, &map_size))
@@ -59,6 +62,7 @@ int main(int ac, char **av)
         printf("Error\nMap validation failed");
         return (1);
     }
+    
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_hook(data.win, 17, 0, close_window, &data);

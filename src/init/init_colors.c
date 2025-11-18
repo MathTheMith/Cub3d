@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:51:29 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 12:49:49 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/18 14:12:24 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static int parse_color_component(const char **str)
 
 void init_c_colors(t_data *data)
 {
-    const char *s1 = data->textures.C;
-    const char *s2 = data->textures.F;
+    const char *s1 = data->path_textures.C;
+    const char *s2 = data->path_textures.F;
 
     data->colors.RC = parse_color_component(&s2);
     data->colors.GC = parse_color_component(&s2);
