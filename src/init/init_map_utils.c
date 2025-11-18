@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:38:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 15:35:47 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/18 20:01:20 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,34 @@ static void process_map_char(char c, int **map, t_data *data, int i, int j)
     }
 }
 
-static void fill_map_line(char *line, int **map, t_data *data, int i)
+static void fill_map_line(char *line, int **map, t_data *data, int i, int width)
 {
-    size_t j;
+    int j;
 
     j = 0;
-    while (j < ft_strlen(line) - 1)
+    while (j < width)
     {
-        process_map_char(line[j], map, data, i, j);
+        if (j < (int)ft_strlen(line) - 1)
+            process_map_char(line[j], map, data, i, j);
+        else
+            map[i][j] = 1;
         j++;
     }
 }
 
-static int **allocate_map(t_map_size *size)
+
+static int **allocate_map(t_map_size *map_size)
 {
     int **map;
     int i;
 
-    map = ft_calloc(size->height, sizeof(int *));
+    map = ft_calloc(map_size->height, sizeof(int *));
     if (!map)
         return (NULL);
     i = 0;
-    while (i < size->height)
+    while (i < map_size->height)
     {
-        map[i] = ft_calloc(size->width, sizeof(int));
+        map[i] = ft_calloc(map_size->width, sizeof(int));
         if (!map[i])
             return (NULL);
         i++;
@@ -71,26 +75,51 @@ static int **allocate_map(t_map_size *size)
     return (map);
 }
 
-int **fill_map(t_map_size *size, t_data *data)
+bool check_map_line(char *line, int start_end)
 {
-    int **map;
-    char *line;
     int i;
-
-    map = allocate_map(size);
-    if (!map)
-    {
-        print_error(E_malloc);
-        return (NULL);
-    }
+    
     i = 0;
-    while (i < size->height)
+    if (start_end)
     {
-        if (data->cub_doc[i][0] == '1')
-        {line = data->cub_doc[i];
-        fill_map_line(line, map, data, i);
-        free(line);}
+        while(line[i])
+        {
+            if (line[i] != '1' && line[i] != '\n')
+                return (0);
+            i++;
+        }
+        return (1);
+    }
+    if (line[0] != '1' || line[ft_strlen(line) - 2] != '1')
+        return 0;
+    return 1;
+}
+
+int **fill_map(t_map_size *map_size, t_data *data)
+{
+    int i;
+    int **map;
+    int start;
+    char *line;
+    int start_end;
+    
+    i = 0;
+    map = allocate_map(map_size);
+    if (!map)
+        return NULL;
+    start = find_map_start(data->cub_doc);
+    while (i < map_size->height)
+    {
+        start_end = 0;
+        line = data->cub_doc[start + i];
+        
+        if (i == 0 || i == map_size->height - 1)
+            start_end = 1;
+        if (check_map_line(line, start_end) == 0)
+            exit_program(data, E_map);
+            
+        fill_map_line(line, map, data, i, map_size->width);
         i++;
     }
-    return (map);
+    return map;
 }

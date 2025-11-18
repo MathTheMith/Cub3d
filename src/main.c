@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 16:10:04 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 19:55:11 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int loop_hook(t_data *data)
     draw_background(data, 1500, 1000);
     draw_wall(data, &data->p);
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
+    printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
     return 0;
 }
 
@@ -62,7 +62,6 @@ int main(int ac, char **av)
         printf("Error\nMap validation failed");
         return (1);
     }
-    
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_hook(data.win, 17, 0, close_window, &data);

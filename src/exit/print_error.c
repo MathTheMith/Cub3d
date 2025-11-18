@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:09:06 by tfournie          #+#    #+#             */
-/*   Updated: 2025/10/31 13:28:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/11/18 19:11:01 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,6 @@ void print_error(t_error error)
         printf("Error_type: numbers of arguments\nYou just need to put the path of the map!\n");
     if (error == E_ext)
         printf("Error_type: bad extension\nYou need a map with .cub at the end!\n");
+    else if (error == E_map)
+        printf("Error\nType : E_map\nThe map isn't valid\n");
 }
