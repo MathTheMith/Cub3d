@@ -70,18 +70,29 @@ void get_map_size(int fd, t_map_size *map_size)
     }
 }
 
-int **init_map(t_data *data, t_map_size *map_size, char *map_name)
-{
-    int fd;
-    int **map;
+// void print_int_map(int **map, t_map_size *map_size)
+// {
+//     int i = 0;
+//     int j = 0;
+//     printf("\n----- MAP INT-----\n");
+//     while (i < map_size->height)
+//     {
+//         j = 0;
+//         while(j < map_size->width)
+//         {
+//             printf("%d", map[i][j]);
+//             j++;
+//         }
+//         printf("\n");
+//         i++;
+//     }
+//     printf("---------------\n");
+// }
 
-    open_map_file(data, map_name, &fd);
-    if (fd < 0)
-        return (NULL);
-    get_map_size(fd, map_size);
-    close(fd);
-    copy_all_doc(data, map_name, map_size);
-    init_textures(data); 
+int **init_map(t_data *data, t_map_size *map_size)
+{
+    int **map;
     map = fill_map(map_size, data);
+    // print_int_map(map, map_size);
     return (map);
 }

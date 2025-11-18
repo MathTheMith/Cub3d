@@ -106,8 +106,9 @@ void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 void draw_wall(t_data *data, t_player *p);
 void draw_background(t_data *data, int width, int height);
 
-int **init_map(t_data *data,t_map_size *size, char *map_name);
+int **init_map(t_data *data,t_map_size *size);
 char **duplicate_map(t_data *data, t_map_size *size);
+void get_map_size(int fd, t_map_size *map_size);
 void	free_map(char **map);
 void copy_all_doc(t_data *data, char *map_name, t_map_size *map_size);
 void open_map_file(t_data *data, char *map_name, int *fd);
