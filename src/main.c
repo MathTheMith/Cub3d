@@ -1,43 +1,32 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 15:53:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 19:55:11 by mvachon          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub.h"
+#include <X11/keysym.h>
 
 int close_window(t_data *data)
 {
-    (void)data;
-    exit(0);
+    exit_program(data, No_error);
     return (0);
 }
 
 int key_hook(int keycode, t_data *data)
 {
-    if (keycode == 65307)
+    if (keycode == XK_Escape)
         close_window(data);
-    if (keycode == 119)
+    if (keycode == XK_w)
         move_forward(data);
-    if (keycode == 115)
+    if (keycode == XK_s)
         move_backward(data);
-    if (keycode == 97)
+    if (keycode == XK_a)
         move_left(data);
-    if (keycode == 100)
+    if (keycode == XK_d)
         move_right(data);
-    if (keycode == 65361)
+    if (keycode == XK_Left)
         rotate_left(data);
-    if (keycode == 65363)
+    if (keycode == XK_Right)
         rotate_right(data);
     return (0);
 }
-
 
 int loop_hook(t_data *data)
 {
@@ -55,13 +44,12 @@ int main(int ac, char **av)
     
     ft_memset(&data, 0, sizeof(t_data));
     data.mlx = mlx_init();
+    if (data.mlx == NULL)
+        exit_program(&data, E_mlx_env);
     parsing(ac, av, &data);
     init_struct(&data, &map_size, av[1]);
     if (!check_map(&data, &map_size))
-    {
-        printf("Error\nMap validation failed");
-        return (1);
-    }
+        exit_program(&data, E_map);
     init_window(&data);
     mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
     mlx_hook(data.win, 17, 0, close_window, &data);

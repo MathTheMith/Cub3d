@@ -25,7 +25,9 @@ void open_map_file(t_data *data, char *map_name, int *fd)
 void init_window(t_data *data)
 {
     data->mlx = mlx_init();
-    data->win = mlx_new_window(data->mlx, 1500, 1000, "Cub3d");
+    data->win = mlx_new_window(data->mlx, 1500, 1000, "Cub3D");
+    if (data->win == NULL)
+        exit_program(data, E_mlx_win);
     data->img = mlx_new_image(data->mlx, 1500, 1000);
     data->data = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
 }

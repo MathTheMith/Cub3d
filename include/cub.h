@@ -10,13 +10,16 @@
 
 typedef enum e_error
 {
-	No_error,
-	Error,
-	E_malloc,
-	E_nbarg,
-	E_ext,
-	E_path,
-	E_map
+    No_error,
+    Error,
+    E_malloc,
+    E_nbarg,
+    E_ext,
+    E_path,
+    E_mlx_env,
+    E_mlx_win,
+    E_tex
+    E_map
 }           t_error;
 
 typedef struct s_player
