@@ -56,8 +56,6 @@ void get_map_size(int fd, t_map_size *map_size)
     char *line;
     int tmp;
 
-    map_size->width = 0;
-    map_size->height = 0;
     line = get_next_line(fd);
     while (line != NULL)
     {

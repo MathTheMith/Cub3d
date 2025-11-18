@@ -44,6 +44,7 @@ void transfer_cub_map(t_data *data, t_map_size *map_size, char *map_name)
 
 void init_struct(t_data *data, t_map_size *map_size, char *map_name)
 {
+    ft_memset(map_size, 0, sizeof(t_map_size));
     transfer_cub_map(data, map_size, map_name);
     init_textures(data);
     data->map = init_map(data, map_size);

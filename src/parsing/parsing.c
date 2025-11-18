@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 10:52:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 13:00:44 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/18 16:45:48 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void parsing(int ac, char **av, t_data *data)
 {
 	int	len;
-	
-    data = NULL;
+
 	if (ac != 2)
 		exit_program(data, E_nbarg);
 	len = ft_strlen(av[1]);
