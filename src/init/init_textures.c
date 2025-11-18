@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:02:21 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 16:08:28 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:26:40 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,22 +102,31 @@ void init_teximg(t_data *data, int i)
 
     x = 32;
     y = 32;
-    data->teximg[i].height = y;
-    data->teximg[i].width = x;
+
     if (i == 0)
-    {
-        printf("%s\n", data->path_textures.NO);    
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.NO, &x, &y);
-    }
     else if (i == 1)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.SO, &x, &y);
     else if (i == 2)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.WE, &x, &y);
     else if (i == 3)
         data->teximg[i].img = mlx_xpm_file_to_image(data->mlx, data->path_textures.EA, &x, &y);
-    if (data->teximg[i].img == NULL)
+
+    if (!data->teximg[i].img)
         exit_program(data, E_path);
+
+    data->teximg[i].width = x;
+    data->teximg[i].height = y;
+
+    // 👉 Récupération du tableau de pixels
+    data->teximg[i].px = (unsigned int *)mlx_get_data_addr(
+        data->teximg[i].img, 
+        &data->teximg[i].bpp,
+        &data->teximg[i].line_len,
+        &data->teximg[i].endian
+    );
 }
+
 
 void init_textures(t_data *data)
 {
