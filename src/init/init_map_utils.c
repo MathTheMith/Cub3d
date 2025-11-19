@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:38:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/18 20:01:20 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/19 11:17:00 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int **allocate_map(t_map_size *map_size)
     int **map;
     int i;
 
-    map = ft_calloc(map_size->height, sizeof(int *));
+    map = ft_calloc(map_size->height + 1, sizeof(int *));
     if (!map)
         return (NULL);
     i = 0;
