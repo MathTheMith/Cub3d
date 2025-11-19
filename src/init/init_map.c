@@ -93,6 +93,8 @@ void get_map_size(t_data *data, t_map_size *map_size)
         map_size->height++;
         i++;
     }
+    data->map_size.height = map_size->height;
+    data->map_size.width = map_size->width;
 }
 
 void print_int_map(int **map, t_map_size *map_size)

@@ -18,7 +18,7 @@ typedef enum e_error
     E_path,
     E_mlx_env,
     E_mlx_win,
-    E_tex
+    E_tex,
     E_map
 }           t_error;
 
@@ -80,6 +80,7 @@ typedef struct s_data
 	int     		endian;
 	int     		**map;
 	char    		**cub_doc;
+	t_map_size		map_size;
 	t_teximg		teximg[4];
 	t_path_textures path_textures;
 	t_player 		p;
@@ -147,7 +148,7 @@ void free_all(t_data *data);
 void print_error(t_error error);
 
 
-void print_themap(t_data *data, t_map_size *map_size);
+void print_int_map(int **map, t_map_size *map_size);
 
 
 #endif
