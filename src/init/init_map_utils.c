@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 14:38:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/19 11:17:00 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:00:53 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,22 @@ static void process_map_char(char c, int **map, t_data *data, int i, int j)
 static void fill_map_line(char *line, int **map, t_data *data, int i, int width)
 {
     int j;
+    int line_len;
 
+    line_len = ft_strlen(line);
+    if (line_len > 0 && line[line_len - 1] == '\n')
+        line_len--;
+    
     j = 0;
     while (j < width)
     {
-        if (j < (int)ft_strlen(line) - 1)
+        if (j < line_len)
             process_map_char(line[j], map, data, i, j);
         else
-            map[i][j] = 1;
+            map[i][j] = 1;  // Remplir le reste avec des murs si nécessaire
         j++;
     }
 }
-
 
 static int **allocate_map(t_map_size *map_size)
 {
@@ -67,7 +71,7 @@ static int **allocate_map(t_map_size *map_size)
     i = 0;
     while (i < map_size->height)
     {
-        map[i] = ft_calloc(map_size->width, sizeof(int));
+        map[i] = ft_calloc(map_size->width[i], sizeof(int));
         if (!map[i])
             return (NULL);
         i++;
@@ -78,21 +82,38 @@ static int **allocate_map(t_map_size *map_size)
 bool check_map_line(char *line, int start_end)
 {
     int i;
+    int len;
     
     i = 0;
+    len = ft_strlen(line);
+    if (len > 0 && line[len - 1] == '\n')
+        len--;
+    
     if (start_end)
     {
-        while(line[i])
+        while(i < len)
         {
-            if (line[i] != '1' && line[i] != '\n')
+            if (line[i] != '1' && line[i] != ' ')
                 return (0);
             i++;
         }
         return (1);
     }
-    if (line[0] != '1' || line[ft_strlen(line) - 2] != '1')
-        return 0;
-    return 1;
+    
+    // Vérifier premier caractère non-espace
+    while (i < len && line[i] == ' ')
+        i++;
+    if (i >= len || line[i] != '1')
+        return (0);
+    
+    // Vérifier dernier caractère non-espace
+    i = len - 1;
+    while (i >= 0 && line[i] == ' ')
+        i--;
+    if (i < 0 || line[i] != '1')
+        return (0);
+    
+    return (1);
 }
 
 int **fill_map(t_map_size *map_size, t_data *data)
@@ -118,7 +139,7 @@ int **fill_map(t_map_size *map_size, t_data *data)
         if (check_map_line(line, start_end) == 0)
             exit_program(data, E_map);
             
-        fill_map_line(line, map, data, i, map_size->width);
+        fill_map_line(line, map, data, i, map_size->width[i]);
         i++;
     }
     return map;
