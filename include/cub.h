@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:08:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:28:41 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:17:34 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_teximg
 
 typedef struct s_map_size
 {
-	int				width;
+	int				*width;
 	int				height;
 }					t_map_size;
 

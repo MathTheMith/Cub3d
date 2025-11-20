@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:13:35 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:29:43 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:54:34 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	loop_hook(t_data *data)
 	draw_wall(data, &data->p);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
     //Debug
-	printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
+	// printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
     //
 	return (0);
 }
