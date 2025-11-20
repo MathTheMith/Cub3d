@@ -21,7 +21,7 @@ void put_pixel(t_data *data, int x, int y, int color)
 {
     char *dst;
     
-    if (x < 0 || x >= 1500 || y < 0 || y >= 1000)
+    if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H)
         return;
     dst = data->data + (y * data->line_len + x * (data->bpp / 8));
     *(unsigned int *)dst = color;

@@ -55,14 +55,14 @@ int	mouse_move(int x, int y, t_data *data)
 	double	rot;
 
 	(void)y;
-	center_x = 1500 / 2;
+	center_x = SCREEN_W / 2;
 	delta = x - data->last_mouse_x;
 	if (delta != 0)
 	{
 		rot = delta * data->dpi;
 		rotate_direction(&data->p, rot);
 		rotate_plane(&data->p, rot);
-		mlx_mouse_move(data->mlx, data->win, center_x, 1000 / 2);
+		mlx_mouse_move(data->mlx, data->win, center_x, SCREEN_H / 2);
 		data->last_mouse_x = center_x;
 	}
 	return (0);
