@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:02:19 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:09:30 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:39:30 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,8 @@ void	process_movement(t_data *data)
 		move_left(data, speed);
 	if (data->key[KEY_D])
 		move_right(data, speed);
+	if (data->key[KEY_La])
+		rotate_left(data);
+	if (data->key[KEY_Ra])
+		rotate_right(data);
 }
