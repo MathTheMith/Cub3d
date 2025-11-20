@@ -6,25 +6,54 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:13:35 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:29:43 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:06:02 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <sys/time.h>
 
-static int	loop_hook(t_data *data)
+size_t	get_current_time(void)
 {
-	process_movement(data);
-	draw_background(data, SCREEN_W, SCREEN_H);
-	draw_wall(data, &data->p);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    //Debug
-	printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
-    //
-	return (0);
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void game_loop(t_data *data)
+int update_fps(void)
+{
+    static size_t last_time = 0;
+    static int frame_count = 0;
+    static int fps = 0;
+
+    size_t current_time = get_current_time();
+    frame_count++;
+
+    if (current_time - last_time >= 1000)
+    {
+        fps = frame_count;
+        frame_count = 0;
+        last_time = current_time;
+        printf("FPS: %d\n", fps);
+    }
+    return fps;
+}
+
+static int loop_hook(t_data *data)
+{
+	update_fps();
+    process_movement(data);
+    draw_background(data, SCREEN_W, SCREEN_H);
+    draw_wall(data, &data->p);
+    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+    // Debug position
+    // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
+    return (0);
+}
+
+
+void	game_loop(t_data *data)
 {
 	init_window(data);
 	hide_mouse(data);

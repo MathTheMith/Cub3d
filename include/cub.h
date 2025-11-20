@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:08:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:28:41 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:29:47 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef enum e_key
 	KEY_A,
 	KEY_S,
 	KEY_D,
+	KEY_Ra,
+	KEY_La,
 	KEY_ESC,
 	KEY_SHIFT,
 	KEY_COUNT
