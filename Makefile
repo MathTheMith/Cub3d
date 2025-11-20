@@ -19,7 +19,7 @@ CFLAGS_RD = -lreadline
 MLX_DIR = minilibx-linux
 MLX_LIB = $(MLX_DIR)/libmlx.a
 MLX_REPO = https://github.com/42Paris/minilibx-linux.git
-MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_FLAGS = -I$(MLX_DIR) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -Iminilibx-linux
 
 # Libft configuration
 LIBFT_DIR = libft
@@ -35,7 +35,9 @@ SRC_FILES = main.c \
 			\
 			game/draw.c \
 			game/raycasting.c \
-			game/move.c \
+			game/move_player.c \
+			game/move_view.c \
+			game/mouse_and_key.c \
 			\
 			init/init_map.c \
 			init/init_player_direction.c \

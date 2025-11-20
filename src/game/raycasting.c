@@ -12,9 +12,6 @@
 
 #include "cub.h"
 
-#define SCREEN_W 1500
-#define SCREEN_H 1000
-
 /****************************** UTILS TEXEL ******************************/
 
 unsigned int    get_texel(t_teximg *tex, int x, int y)
@@ -149,8 +146,10 @@ void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
     wall_x -= floor(wall_x);
 
     int tex_x = (int)(wall_x * (double)tex->width);
-    if (ray->side == 0 && ray->dir_x > 0) tex_x = tex->width - tex_x - 1;
-    if (ray->side == 1 && ray->dir_y < 0) tex_x = tex->width - tex_x - 1;
+    if (ray->side == 0 && ray->dir_x < 0) 
+        tex_x = tex->width - tex_x - 1;
+    if (ray->side == 1 && ray->dir_y > 0) 
+        tex_x = tex->width - tex_x - 1;
 
     // ----- Vertical texture stepping -----
     double step = 1.0 * tex->height / line_height;

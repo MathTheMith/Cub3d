@@ -20,6 +20,7 @@ void set_player_north(t_data *data, int i, int j)
     data->p.dir_y = -1;
     data->p.plane_x = 0.75;
     data->p.plane_y = 0;
+    data->p.p_speed = P_SPEED;
 }
 
 void set_player_south(t_data *data, int i, int j)
@@ -30,6 +31,7 @@ void set_player_south(t_data *data, int i, int j)
     data->p.dir_y = 1;
     data->p.plane_x = -0.75;
     data->p.plane_y = 0;
+    data->p.p_speed = P_SPEED;
 }
 
 void set_player_east(t_data *data, int i, int j)
@@ -40,6 +42,7 @@ void set_player_east(t_data *data, int i, int j)
     data->p.dir_y = 0;
     data->p.plane_x = 0;
     data->p.plane_y = 0.75;
+    data->p.p_speed = P_SPEED;
 }
 
 void set_player_west(t_data *data, int i, int j)
@@ -50,4 +53,5 @@ void set_player_west(t_data *data, int i, int j)
     data->p.dir_y = 0;
     data->p.plane_x = 0;
     data->p.plane_y = -0.75;
+    data->p.p_speed = P_SPEED;
 }
