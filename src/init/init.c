@@ -56,5 +56,7 @@ void init_struct(t_data *data, t_map_size *map_size, char *map_name)
     data->map = init_map(data, map_size);
     if (data->map == NULL)
         exit_program(data, Error);
+    data->last_mouse_x = SCREEN_W / 2;
+    data->dpi = M_DPI;
     printf("%s \n%s\n", data->path_textures.C, data->path_textures.F);
 }
