@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:05:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:16:57 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 15:32:55 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	key_press(int keycode, t_data *data)
 		data->key[KEY_S] = 1;
 	if (keycode == XK_d)
 		data->key[KEY_D] = 1;
+	if (keycode == XK_Right)
+		data->key[KEY_Ra] = 1;
+	if (keycode == XK_Left)
+		data->key[KEY_La] = 1;
 	if (keycode == XK_Shift_L)
 		data->key[KEY_SHIFT] = 1;
 	if (keycode == XK_Escape)
@@ -46,6 +50,10 @@ int	key_release(int keycode, t_data *data)
 		data->key[KEY_S] = 0;
 	if (keycode == XK_d)
 		data->key[KEY_D] = 0;
+	if (keycode == XK_Right)
+		data->key[KEY_Ra] = 0;
+	if (keycode == XK_Left)
+		data->key[KEY_La] = 0;
 	if (keycode == XK_Shift_L)
 		data->key[KEY_SHIFT] = 0;
 	return (0);
