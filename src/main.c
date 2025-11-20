@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:13:35 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:16:51 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:29:43 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static int	loop_hook(t_data *data)
 	return (0);
 }
 
+void game_loop(t_data *data)
+{
+	init_window(data);
+	hide_mouse(data);
+	lock_mouse(data);
+	mlx_hook(data->win, 2, 1L << 0, key_press, data);
+	mlx_hook(data->win, 3, 1L << 1, key_release, data);
+	mlx_hook(data->win, 17, 0, close_window, data);
+	mlx_hook(data->win, 6, 1L << 6, mouse_move, data);
+	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_loop(data->mlx);
+}
+
 int	main(int ac, char **av)
 {
 	t_data		data;
@@ -37,14 +50,6 @@ int	main(int ac, char **av)
 	init_struct(&data, &map_size, av[1]);
 	if (!check_map(&data, &map_size))
 		exit_program(&data, E_map);
-	init_window(&data);
-	hide_mouse(&data);
-	lock_mouse(&data);
-	mlx_hook(data.win, 2, 1L << 0, key_press, &data);
-	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
-	mlx_hook(data.win, 17, 0, close_window, &data);
-	mlx_hook(data.win, 6, 1L << 6, mouse_move, &data);
-	mlx_loop_hook(data.mlx, loop_hook, &data);
-	mlx_loop(data.mlx);
+	game_loop(&data);
 	return (0);
 }
