@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:08:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 15:29:47 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:45:35 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define SCREEN_H 1000
 # define M_DPI 0.0006
 # define P_SPEED 0.1
+# define SCREEN_CUT 1
 
 typedef enum e_error
 {

@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2025/10/15 16:04:08 by marvin            #+#    #+#             */
 /*   Updated: 2025/10/15 16:04:08 by marvin           ###   ########.fr       */
 /*                                                                            */
@@ -12,83 +15,59 @@
 
 #include "cub.h"
 
-int create_rgb(int r, int g, int b)
+
+int	create_rgb(int r, int g, int b)
 {
-    return (r << 16 | g << 8 | b);
+	return (r << 16 | g << 8 | b);
 }
 
-void put_pixel(t_data *data, int x, int y, int color)
+void	put_pixel(t_data *data, int x, int y, int color)
 {
-    char *dst;
-    
-    if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H)
-        return;
-    dst = data->data + (y * data->line_len + x * (data->bpp / 8));
-    *(unsigned int *)dst = color;
+	char *dst;
+
+	if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H)
+		return ;
+	dst = data->data + (y * data->line_len + x * (data->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
-void draw_background(t_data *data, int width, int height)
+static void	fill_line(t_data *data, int y, int width, int color)
 {
-    int x;
-    int y;
-    int color_f = create_rgb(data->colors.RF, data->colors.GF, data->colors.BF);
-    int color_c = create_rgb(data->colors.RC, data->colors.GC, data->colors.BC);
+	int x = 0;
+	unsigned int *row;
 
-    y = 0;
-    while (y < height / 2)
-    {
-        x = -1;
-        while (++x < width)
-            put_pixel(data, x, y, color_f);
-        y++;
-    }
-    while (y < height)
-    {
-        x = -1;
-        while (++x < width)
-            put_pixel(data, x, y, color_c);
-        y++;
-    }
+	row = (unsigned int *)(data->data + y * data->line_len);
+
+	while (x < width)
+	{
+	    row[x] = color;
+		x++;
+	}
 }
 
-
-void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+void	draw_background(t_data *data, int width, int height)
 {
-    int dx;
-    int dy;
-    int sx;
-    int sy;
-    int err;
-    int e2;
+	int color_floor;
+	int color_ceiling;
+	int y_start;
+	int y_end;
 
-    dx = abs(x1 - x0);
-    dy = abs(y1 - y0);
-    
-    if (x0 < x1)
-        sx = 1;
-    else
-        sx = -1;
-    if (y0 < y1)
-        sy = 1;
-    else
-        sy = -1;
-    
-    err = dx - dy;
-    while (1)
-    {
-        put_pixel(data, x0, y0, color);
-        if (x0 == x1 && y0 == y1)
-            break;
-        e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx)
-        {
-            err += dx;
-            y0 += sy;
-        }
-    }
+	y_start = 0;
+	y_end = height / 2;
+	color_floor = create_rgb(data->colors.RF, data->colors.GF,
+			data->colors.BF);
+	color_ceiling = create_rgb(data->colors.RC, data->colors.GC,
+			data->colors.BC);
+	while (y_start < y_end)
+	{
+		fill_line(data, y_start, width, color_floor);
+		y_start++;
+	}
+	y_start = height / 2;
+	y_end = height;
+	while (y_start < y_end)
+	{
+		fill_line(data, y_start, width, color_ceiling);
+		y_start++;
+	}
 }

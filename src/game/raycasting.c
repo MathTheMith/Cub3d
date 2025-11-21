@@ -125,15 +125,20 @@ t_teximg *get_wall_texture(t_data *data, t_ray *ray)
 
 void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
 {
-    int line_height = (int)(SCREEN_H / ray->perp_wall_dist);
-    int draw_start = -line_height / 2 + SCREEN_H / 2;
-    int draw_end = line_height / 2 + SCREEN_H / 2;
+    int line_height;
+    int draw_start;
+    int draw_end;
+    t_teximg *tex;
+    int tex_x;
 
-    if (draw_start < 0) draw_start = 0;
-    if (draw_end >= SCREEN_H) draw_end = SCREEN_H - 1;
-
-    // ----- Choose the correct texture -----
-    t_teximg *tex = get_wall_texture(data, ray);
+    line_height = (int)(SCREEN_H / ray->perp_wall_dist);
+    draw_start = -line_height / 2 + SCREEN_H / 2;
+    draw_end = line_height / 2 + SCREEN_H / 2;
+    if (draw_start < 0)
+        draw_start = 0;
+    if (draw_end >= SCREEN_H)
+        draw_end = SCREEN_H - 1;
+    tex = get_wall_texture(data, ray);
 
     // ----- Compute exact hit point -----
     double wall_x;
@@ -142,10 +147,8 @@ void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
         wall_x = p->p_y + ray->perp_wall_dist * ray->dir_y;
     else
         wall_x = p->p_x + ray->perp_wall_dist * ray->dir_x;
-
     wall_x -= floor(wall_x);
-
-    int tex_x = (int)(wall_x * (double)tex->width);
+    tex_x = (int)(wall_x * (double)tex->width);
     if (ray->side == 0 && ray->dir_x < 0) 
         tex_x = tex->width - tex_x - 1;
     if (ray->side == 1 && ray->dir_y > 0) 
@@ -153,20 +156,38 @@ void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
 
     // ----- Vertical texture stepping -----
     double step = 1.0 * tex->height / line_height;
-    double tex_pos = (draw_start - SCREEN_H / 2 + line_height / 2) * step;
+    int offset = draw_start - (SCREEN_H >> 1) + (line_height >> 1);
+    double tex_pos = offset * step;
 
-    for (int y = draw_start; y < draw_end; y++)
+    // if (x % 100000 == 0)
+    // {   
+    //     printf("=====DEBUG======\n");
+    //     printf("taille mur     :%d\n", line_height);
+    //     printf("draw_start:%d\n", draw_start);
+    //     printf("draw_end     :%d\n", draw_end);
+    //     printf("side:%d\n", ray->side);
+    //     printf("wall_x:%.4f\n", wall_x);
+    //     printf("tex_x:%d\n", tex_x);
+    //     printf("step:%.2f\n", step);
+    //     printf("offset:%d\n", offset);
+    //     printf("tex_pos:%.2f\n", tex_pos);
+    //     printf("==============\n\n");
+    // }
+
+    int y;
+    int tex_y;
+    unsigned int color;
+
+    y = draw_start;
+    while (y < draw_end)
     {
-        int tex_y = (int)tex_pos & (tex->height - 1);
+        tex_y = (int)tex_pos & (tex->height - 1);
         tex_pos += step;
-
-        unsigned int color = get_texel(tex, tex_x, tex_y);
-
-        // darken if side == 1 (simple shading)
+        color = get_texel(tex, tex_x, tex_y);
         if (ray->side == 1)
             color = (color >> 1) & 0x7F7F7F;
-
         put_pixel(data, x, y, color);
+        y++;
     }
 }
 
