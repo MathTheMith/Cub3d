@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:13:35 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:29:43 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:19:57 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ void game_loop(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av)
 {
 	t_data		data;
 	t_map_size	map_size;
 
 	ft_memset(&data, 0, sizeof(t_data));
+	ft_memset(&map_size, 0, sizeof(t_map_size));
+
 	data.mlx = mlx_init();
-	if (data.mlx == NULL)
+	if (!data.mlx)
 		exit_program(&data, E_mlx_env);
-	parsing(ac, av, &data);
-	init_struct(&data, &map_size, av[1]);
-	if (!check_map(&data, &map_size))
-		exit_program(&data, E_map);
+	parsing(ac, av, &data, &map_size);
+
+	init_struct(&data, &map_size, &data.char_map);
+	free_map(data.char_map);
 	game_loop(&data);
 	return (0);
 }

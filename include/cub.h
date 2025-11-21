@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:08:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:28:41 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:19:11 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_teximg
 
 typedef struct s_map_size
 {
-	int				width;
+	int				*width;
 	int				height;
 }					t_map_size;
 
@@ -101,6 +101,12 @@ typedef struct s_colors
 	int				BC;
 }					t_colors;
 
+typedef struct s_line_exits
+{
+	int				first_exit;
+	int				last_exit;
+}					t_line_exits;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -111,6 +117,7 @@ typedef struct s_data
 	int				line_len;
 	int				endian;
 	int				**map;
+	char			**char_map;
 	char			**cub_doc;
 	int				last_mouse_x;
 	double			dpi;
@@ -120,7 +127,7 @@ typedef struct s_data
 	t_path_textures	path_textures;
 	t_player		p;
 	t_colors		colors;
-
+	t_line_exits	*line_exits;
 }					t_data;
 
 typedef struct s_ray
@@ -147,15 +154,19 @@ void				draw_line(t_data *data, int x0, int y0, int x1, int y1,
 void				draw_wall(t_data *data, t_player *p);
 void				draw_background(t_data *data, int width, int height);
 
-int					**init_map(t_data *data, t_map_size *size);
+int					**init_map(t_data *data, t_map_size *size, char ***char_map_out);
 char				**duplicate_map(t_data *data, t_map_size *size);
 void				get_doc_size(int fd, int *doc_height, int *doc_width);
 void				free_map(char **map);
+void transfer_cub_map(t_data *data, char *map_name);
+void get_map_size(t_data *data, t_map_size *map_size);
 int					find_map_start(char **doc);
 void				copy_all_doc(t_data *data, char *map_name, int *doc_height);
 void				open_map_file(t_data *data, char *map_name, int *fd);
-void				init_struct(t_data *data, t_map_size *size, char *map_name);
+void				init_struct(t_data *data, t_map_size *size, char ***char_map_out);
 int					**fill_map(t_map_size *size, t_data *data);
+char				**fill_char_map(t_map_size *size, t_data *data);
+int					**convert_char_to_int_map(char **char_map, t_map_size *size);
 void				init_textures(t_data *data);
 void				init_c_colors(t_data *data);
 void				init_window(t_data *data);
@@ -165,7 +176,8 @@ void				set_player_south(t_data *data, int i, int j);
 void				set_player_east(t_data *data, int i, int j);
 void				set_player_west(t_data *data, int i, int j);
 
-int					check_map(t_data *data, t_map_size *size);
+int					check_map(t_data *data, t_map_size *size, char **char_map);
+void check_map2(t_data *data, t_map_size *map_size, char *map_name);
 
 void				move_forward(t_data *data, double speed);
 void				move_backward(t_data *data, double speed);
@@ -184,7 +196,7 @@ void				hide_mouse(t_data *data);
 void				lock_mouse(t_data *data);
 int					close_window(t_data *data);
 
-void				parsing(int ac, char **av, t_data *data);
+void				parsing(int ac, char **av, t_data *data, t_map_size *map);
 void				exit_program(t_data *data, t_error error);
 void				free_all(t_data *data);
 void				print_error(t_error error);

@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 13:21:32 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/18 13:23:43 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/21 10:47:43 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char **duplicate_map(t_data *data, t_map_size *size)
     i = 0;
     while (i < size->height)
     {
-        copy[i] = malloc(sizeof(char) * (size->width + 1));
+        copy[i] = malloc(sizeof(char) * (size->width[i] + 1));
         if (!copy[i])
         {
             while (--i >= 0)
@@ -48,7 +48,7 @@ char **duplicate_map(t_data *data, t_map_size *size)
             return (NULL);
         }
         j = 0;
-        while (j < size->width)
+        while (j < size->width[i])
         {
             copy[i][j] = (data->map[i][j] == 0) ? '0' : '1';
             j++;

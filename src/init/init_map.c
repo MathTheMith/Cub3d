@@ -68,7 +68,7 @@ int find_map_start(char **doc)
     }
     return -1;
 }
-int is_map_line(char *line)
+int is_map_a_line(char *line)
 {
     int j = 0;
     while (line[j] == ' ')
@@ -81,18 +81,33 @@ void get_map_size(t_data *data, t_map_size *map_size)
     int start;
     int i;
     int len;
+    int map_idx;
 
-    len = 0;
     start = find_map_start(data->cub_doc);
     i = start;
-    while (data->cub_doc[i] && is_map_line(data->cub_doc[i]))
+    
+    while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
     {
-        len = ft_strlen(data->cub_doc[i]);
-        if (len > map_size->width)
-            map_size->width = len;
         map_size->height++;
         i++;
     }
+    
+    map_size->width = ft_calloc(map_size->height, sizeof(int));
+    if (!map_size->width)
+        exit_program(data, E_malloc);
+    
+    i = start;
+    map_idx = 0;
+    while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
+    {
+        len = ft_strlen(data->cub_doc[i]);
+        if (len > 0 && data->cub_doc[i][len - 1] == '\n')
+            len--;
+        map_size->width[map_idx] = len;
+        map_idx++;
+        i++;
+    }
+    
     data->map_size.height = map_size->height;
     data->map_size.width = map_size->width;
 }
@@ -104,20 +119,11 @@ void print_int_map(int **map, t_map_size *map_size)
     printf("\n----- MAP INT -----\n");
     for (i = 0; i < map_size->height; i++)
     {
-        for (j = 0; j < map_size->width; j++)
+        for (j = 0; j < map_size->width[i]; j++)
         {
             printf("%d", map[i][j]);
         }
         printf("\n");
     }
     printf("---------------\n");
-}
-
-int **init_map(t_data *data, t_map_size *map_size)
-{
-    int **map;
-    get_map_size(data, map_size);
-    map = fill_map(map_size, data);
-    print_int_map(map, map_size);
-    return (map);
 }
