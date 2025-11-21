@@ -67,8 +67,7 @@ int find_map_start(char **doc)
     }
     return -1;
 }
-
-int is_map_line(char *line)
+int is_map_a_line(char *line)
 {
     int j = 0;
     while (line[j] == ' ')
@@ -86,7 +85,7 @@ void get_map_size(t_data *data, t_map_size *map_size)
     start = find_map_start(data->cub_doc);
     i = start;
     
-    while (data->cub_doc[i] && is_map_line(data->cub_doc[i]))
+    while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
     {
         map_size->height++;
         i++;
@@ -98,7 +97,7 @@ void get_map_size(t_data *data, t_map_size *map_size)
     
     i = start;
     map_idx = 0;
-    while (data->cub_doc[i] && is_map_line(data->cub_doc[i]))
+    while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
     {
         len = ft_strlen(data->cub_doc[i]);
         if (len > 0 && data->cub_doc[i][len - 1] == '\n')

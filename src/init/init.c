@@ -48,15 +48,16 @@ void transfer_cub_map(t_data *data, char *map_name)
     close(fd);
 }
 
-void init_struct(t_data *data, t_map_size *map_size, char *map_name)
+void init_struct(t_data *data, t_map_size *map_size, char ***char_map_out)
 {
-    ft_memset(map_size, 0, sizeof(t_map_size));
-    transfer_cub_map(data, map_name);
-    init_textures(data);
-    data->map = init_map(data, map_size);
-    if (data->map == NULL)
-        exit_program(data, Error);
-    data->last_mouse_x = SCREEN_W / 2;
-    data->dpi = M_DPI;
-    printf("%s \n%s\n", data->path_textures.C, data->path_textures.F);
+	data->map = convert_char_to_int_map(*char_map_out, map_size);
+	if (!data->map)
+	{
+		free_map(*char_map_out);
+		exit_program(data, E_map);
+	}
+	init_textures(data);
+	data->last_mouse_x = SCREEN_W / 2;
+	data->dpi = M_DPI;
+	printf("%s \n%s\n", data->path_textures.C, data->path_textures.F);
 }
