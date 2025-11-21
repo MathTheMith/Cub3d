@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 18:48:25 by marvin            #+#    #+#             */
-/*   Updated: 2025/10/15 20:00:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/11/20 15:00:00 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void get_doc_size(int fd, int *doc_height, int *doc_width)
 {
     char *line;
     int tmp;
-
 
     line = get_next_line(fd);
     while (line != NULL)
@@ -126,4 +125,13 @@ void print_int_map(int **map, t_map_size *map_size)
         printf("\n");
     }
     printf("---------------\n");
+}
+
+int **init_map(t_data *data, t_map_size *map_size)
+{
+    int **map;
+    get_map_size(data, map_size);
+    map = fill_map(map_size, data);
+    print_int_map(map, map_size);
+    return (map);
 }

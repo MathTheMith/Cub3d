@@ -23,7 +23,9 @@ int flood_fill(char **map, int x, int y, t_map_size *size)
         return (1);
     if (map[y][x] == ' ')
         return (0);
+
     map[y][x] = 'F';
+
     if (!flood_fill(map, x + 1, y, size))
         return (0);
     if (!flood_fill(map, x - 1, y, size))
@@ -34,6 +36,7 @@ int flood_fill(char **map, int x, int y, t_map_size *size)
         return (0);
     return (1);
 }
+
 
 void print_map(char **map, t_map_size *map_size)
 {

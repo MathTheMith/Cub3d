@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub.h                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/20 13:08:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/21 14:19:11 by mvachon          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #ifndef CUB_H
 # define CUB_H
@@ -27,6 +17,7 @@
 # define SCREEN_H 1000
 # define M_DPI 0.0006
 # define P_SPEED 0.1
+# define SCREEN_CUT 1
 
 typedef enum e_error
 {
@@ -48,6 +39,8 @@ typedef enum e_key
 	KEY_A,
 	KEY_S,
 	KEY_D,
+	KEY_Ra,
+	KEY_La,
 	KEY_ESC,
 	KEY_SHIFT,
 	KEY_COUNT
