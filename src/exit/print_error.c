@@ -20,5 +20,7 @@ void print_error(t_error error)
         printf("Error\nType: E_tex\nThe textures of the wall is invalid(check the file or the path)!\n");
     else if (error == E_map)
         printf("Error\nType: E_map\nThe map isn't valid\n");
+    else if (error == E_read)
+        printf("Error\nType: E_read\n\n");
 }
 

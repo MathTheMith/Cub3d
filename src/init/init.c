@@ -43,5 +43,6 @@ void init_struct(t_data *data, t_map_size *map_size, char ***char_map_out)
 	init_textures(data);
 	data->last_mouse_x = SCREEN_W / 2;
 	data->dpi = M_DPI;
-	printf("%s \n%s\n", data->path_textures.C, data->path_textures.F);
+    // DEBUG
+	// printf("%s \n%s\n", data->path_textures.C, data->path_textures.F);
 }
