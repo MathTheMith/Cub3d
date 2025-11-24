@@ -61,30 +61,36 @@ void minimap(t_data *data)
 	}
 }
 
-static int loop_hook(t_data *data)
+static int render_loop(t_data *data)
 {
+    static long last_time = 0;
+    struct timeval tv;
+    long now;
+	int f_time;
+
+	f_time = 1000000 / 60;
+    gettimeofday(&tv, NULL);
+    now = tv.tv_sec * 1000000 + tv.tv_usec;
+    if (now - last_time < f_time)
+        return (0);
+    last_time = now;
 	update_fps();
     process_movement(data);
-    draw_background(data, SCREEN_W, SCREEN_H);
+	draw_background(data, SCREEN_W, SCREEN_H);
     draw_wall(data, &data->p);
-	// minimap(data);
-    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    // DEBUG
-    // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
     return (0);
 }
-
 
 void	game_loop(t_data *data)
 {
 	init_window(data);
-	// hide_mouse(data);
-	// lock_mouse(data);
+	mlx_mouse_hide(data->mlx, data->win);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_hook(data->win, 6, 1L << 6, mouse_move, data);
-	mlx_loop_hook(data->mlx, loop_hook, data);
+	mlx_loop_hook(data->mlx, render_loop, data);
 	mlx_loop(data->mlx);
 }
 

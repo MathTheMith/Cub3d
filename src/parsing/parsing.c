@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 10:52:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 15:25:39 by tfournie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub.h"
 
@@ -81,16 +71,16 @@ int get_map_textures(t_data *data, char ***textures_doc)
     while (i < start)
     {
         (*textures_doc)[i] = ft_strdup(data->cub_doc[i]);
-		if (!(*textures_doc)[i])
-		{
-			while (i > 0)
-            {
-                i--;
-                free((*textures_doc)[i]);
-            }
-            free(*textures_doc);
-			exit_program(data, E_malloc);
-		}
+        if (!(*textures_doc)[i])
+        {
+          while (i > 0)
+                {
+                    i--;
+                    free((*textures_doc)[i]);
+                }
+                free(*textures_doc);
+          exit_program(data, E_malloc);
+        }
         i++;
     }
 	return (start);
