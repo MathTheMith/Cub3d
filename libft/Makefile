@@ -6,7 +6,7 @@
 #    By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/17 13:56:20 by tfournie          #+#    #+#              #
-#    Updated: 2025/11/17 15:41:52 by tfournie         ###   ########.fr        #
+#    Updated: 2025/11/24 13:40:21 by tfournie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,8 +56,7 @@ SRC_FILES = 	ft_atoi.c \
 				ft_toupper.c \
 				ft_strstr.c \
 				ft_realloc.c \
-				get_next_line/get_next_line.c \
-				get_next_line/get_next_line_utils.c \
+				get_next_line.c \
 
 SRC_PATH = functions
 OBJ_DIR = obj

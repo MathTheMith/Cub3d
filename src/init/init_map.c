@@ -32,6 +32,8 @@ void copy_all_doc(t_data *data, char *map_name, int *doc_height)
         i++;
         line = get_next_line(fd);
     }
+    if (line)
+        free(line);
     data->cub_doc[i] = NULL;
     get_next_line(-1);
     close(fd);
