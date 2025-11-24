@@ -6,11 +6,10 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:59:09 by math              #+#    #+#             */
-/*   Updated: 2025/11/17 15:44:58 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/24 11:49:53 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
 #include "../../libft.h"
 
 

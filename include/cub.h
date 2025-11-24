@@ -16,7 +16,7 @@
 # define SCREEN_W 1500
 # define SCREEN_H 1000
 # define M_DPI 0.0006
-# define P_SPEED 0.1
+# define P_SPEED 0.03
 # define SCREEN_CUT 1
 
 typedef enum e_error
