@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 10:52:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 13:20:26 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/24 16:35:12 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void get_map_textures(t_data *data, char ***cub_map)
     while (i < start)
     {
         (*cub_map)[i] = ft_strdup(data->cub_doc[i]);
-        printf("%s", (*cub_map)[i]);
         i++;
     }
 	(*cub_map)[i] = NULL;

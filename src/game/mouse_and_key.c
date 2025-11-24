@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/20 13:05:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 15:32:55 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/24 16:32:46 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,41 +57,4 @@ int	key_release(int keycode, t_data *data)
 	if (keycode == XK_Shift_L)
 		data->key[KEY_SHIFT] = 0;
 	return (0);
-}
-
-void	hide_mouse(t_data *data)
-{
-	t_xvar		*xvar;
-	t_win_list	*xwin;
-	Display		*disp;
-	Window		win;
-	Pixmap		blank;
-	XColor		dummy;
-	char		data_bits[1] = {0};
-	Cursor		cursor;
-
-	xvar = (t_xvar *)data->mlx;
-	xwin = (t_win_list *)data->win;
-	disp = xvar->display;
-	win = xwin->window;
-	blank = XCreateBitmapFromData(disp, win, data_bits, 1, 1);
-	cursor = XCreatePixmapCursor(disp, blank, blank, &dummy, &dummy, 0, 0);
-	XDefineCursor(disp, win, cursor);
-	XFreeCursor(disp, cursor);
-	XFreePixmap(disp, blank);
-}
-
-void	lock_mouse(t_data *data)
-{
-	t_xvar		*xvar;
-	t_win_list	*xwin;
-	Display		*disp;
-	Window		win;
-
-	xvar = (t_xvar *)data->mlx;
-	xwin = (t_win_list *)data->win;
-	disp = xvar->display;
-	win = xwin->window;
-	XGrabPointer(disp, win, True, PointerMotionMask, GrabModeAsync,
-		GrabModeAsync, win, None, CurrentTime);
 }
