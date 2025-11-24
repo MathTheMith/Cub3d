@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 10:52:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 11:33:30 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/24 13:20:26 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,6 @@ void are_textures(t_data *data, char **textures_doc)
 			}
 			j++;
 		}
-
-		// if (j == 6 && ft_strlen(textures_doc[i]) > 1)
-		// 	exit_program(data, E_tex);
-
 		i++;
 	}
 
@@ -93,7 +89,6 @@ void get_map_textures(t_data *data, char ***cub_map)
 void check_textures(t_data *data)
 {
     char **textures_doc;
-
     get_map_textures(data, &textures_doc);
 	are_textures(data, textures_doc);
 }

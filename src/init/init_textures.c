@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 15:02:21 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 14:48:34 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/24 13:27:12 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ void check_line(t_data *data, char *line)
 {
     int i = 0;
 
-    // skip initial spaces
     while (line[i] == ' ' || (line[i] >= '\t' && line[i] <= '\r'))
         i++;
 
-    // NORTH
     if (line[i] == 'N' && line[i+1] == 'O' &&
         (line[i+2] == ' ' || line[i+2] == '\t'))
     {
@@ -40,7 +38,6 @@ void check_line(t_data *data, char *line)
         data->path_textures.NO = extract_path(line, i);
         return ;
     }
-    // SOUTH
     if (line[i] == 'S' && line[i+1] == 'O' &&
         (line[i+2] == ' ' || line[i+2] == '\t'))
     {
@@ -48,7 +45,6 @@ void check_line(t_data *data, char *line)
         data->path_textures.SO = extract_path(line, i);
         return ;
     }
-    // WEST
     if (line[i] == 'W' && line[i+1] == 'E' &&
         (line[i+2] == ' ' || line[i+2] == '\t'))
     {
@@ -56,7 +52,6 @@ void check_line(t_data *data, char *line)
         data->path_textures.WE = extract_path(line, i);
         return ;
     }
-    // EAST
     if (line[i] == 'E' && line[i+1] == 'A' &&
         (line[i+2] == ' ' || line[i+2] == '\t'))
     {
@@ -65,7 +60,6 @@ void check_line(t_data *data, char *line)
         return ;
     }
 
-    // FLOOR COLOR
     if (line[i] == 'F' && (line[i+1] == ' ' || line[i+1] == '\t'))
     {
         i++;
@@ -73,7 +67,6 @@ void check_line(t_data *data, char *line)
         return ;
     }
 
-    // CEILING COLOR
     if (line[i] == 'C' && (line[i+1] == ' ' || line[i+1] == '\t'))
     {
         i++;

@@ -6,13 +6,13 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:51:29 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 12:08:32 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/24 14:03:22 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-static int parse_color_component(const char **str)
+static int parse_color_component(char **str, size_t *rgb_lenght, bool last)
 {
     int value = 0;
 
@@ -20,40 +20,55 @@ static int parse_color_component(const char **str)
     {
         value = value * 10 + (**str - '0');
         (*str)++;
+        *rgb_lenght+=1;
     }
-    if (**str == ',')
+    if (**str == ',' && last == 0)
+    {
         (*str)++;
+        *rgb_lenght+=1;
+    }
     return value;
 }
 
 void init_c_colors(t_data *data)
 {
-    const char *s1 = data->path_textures.C;
-    const char *s2 = data->path_textures.F;
+    char *s1 = data->path_textures.C;
+    char *s2 = data->path_textures.F;
 
-    data->colors.RC = parse_color_component(&s2);
-    if (!data->colors.RC || data->colors.RC >= 255)
+    char *orig_s1 = s1;
+    char *orig_s2 = s2;
+    size_t rgb_lenght_F;
+    size_t rgb_lenght_C;
+    
+    rgb_lenght_F = 0;
+    rgb_lenght_C = 0;
+
+    data->colors.RC = parse_color_component(&s2, &rgb_lenght_C, 0);
+    if (data->colors.RC < 0 || data->colors.RC >= 255)
         exit_program(data, E_tex);
-    data->colors.GC = parse_color_component(&s2);
-    if (!data->colors.GC || data->colors.GC >= 255)
+    data->colors.GC = parse_color_component(&s2, &rgb_lenght_C, 0);
+    if (data->colors.GC < 0 || data->colors.GC >= 255)
         exit_program(data, E_tex);
-    data->colors.BC = parse_color_component(&s2);
-    if (!data->colors.BC || data->colors.BC >= 255)
+    data->colors.BC = parse_color_component(&s2, &rgb_lenght_C, 1);
+    if (data->colors.BC < 0 || data->colors.BC >= 255)
         exit_program(data, E_tex);
-    data->colors.RF = parse_color_component(&s1);
-    if (!data->colors.RF || data->colors.RF >= 255)
+    data->colors.RF = parse_color_component(&s1, &rgb_lenght_F, 0);
+    if (data->colors.RF < 0 || data->colors.RF >= 255)
         exit_program(data, E_tex);
-    data->colors.GF = parse_color_component(&s1);
-    if (!data->colors.GF || data->colors.GF >= 255)
+    data->colors.GF = parse_color_component(&s1, &rgb_lenght_F, 0);
+    if (data->colors.GF < 0 || data->colors.GF >= 255)
         exit_program(data, E_tex);
-    data->colors.BF = parse_color_component(&s1);
-    if (!data->colors.BF || data->colors.BF >= 255)
+    data->colors.BF = parse_color_component(&s1, &rgb_lenght_F, 1);
+    if (data->colors.BF < 0 || data->colors.BF >= 255)
         exit_program(data, E_tex);
+
     // DEBUG
-    // static int q = 0;
-    // if (q == 0)
-    //     printf("prout:%d, %d, %d\n",
-    //            data->colors.RF, data->colors.GF, data->colors.BF);
-    // q++;
+    // printf("\n rgblenghtF %zu, s1 %zu\n", rgb_lenght_F, ft_strlen(orig_s1));
+    // printf("\n rgblenghtC %zu, s2 %zu\n", rgb_lenght_C, ft_strlen(orig_s2));
+        
+    if (ft_strlen(orig_s1) != rgb_lenght_F ||
+        ft_strlen(orig_s2) != rgb_lenght_C)
+        exit_program(data, E_tex);
+
 }
 
