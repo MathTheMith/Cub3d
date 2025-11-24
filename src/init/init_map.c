@@ -33,6 +33,7 @@ void copy_all_doc(t_data *data, char *map_name, int *doc_height)
         line = get_next_line(fd);
     }
     data->cub_doc[i] = NULL;
+    get_next_line(-1);
     close(fd);
 }
 
@@ -51,6 +52,7 @@ void get_doc_size(int fd, int *doc_height, int *doc_width)
         line = get_next_line(fd);
         (*doc_height)++;
     }
+    get_next_line(-1);
 }
 
 int find_map_start(char **doc)
@@ -127,11 +129,11 @@ void print_int_map(int **map, t_map_size *map_size)
     printf("---------------\n");
 }
 
-int **init_map(t_data *data, t_map_size *map_size)
-{
-    int **map;
-    get_map_size(data, map_size);
-    map = fill_map(map_size, data);
-    print_int_map(map, map_size);
-    return (map);
-}
+// int **init_map(t_data *data, t_map_size *map_size)
+// {
+//     int **map;
+//     get_map_size(data, map_size);
+//     map = fill_map(map_size, data);
+//     print_int_map(map, map_size);
+//     return (map);
+// }
