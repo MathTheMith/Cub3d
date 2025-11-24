@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:07:51 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/19 11:13:10 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/24 15:30:38 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,23 @@ void free_cub_doc(t_data *data)
     data->cub_doc = NULL;
 }
 
+void free_cmap(t_data *data)
+{
+    int i;
+
+    if (data->char_map)
+    {
+        i = 0;
+        while (i < data->map_size.height)
+        {
+            free(data->char_map[i]);
+            i++;
+        }
+        free(data->char_map);
+        data->char_map = NULL;
+    }
+}
+
 void free_all(t_data *data)
 {
     int i;
@@ -79,6 +96,9 @@ void free_all(t_data *data)
         free(data->map);
         data->map = NULL;
     }
+    if (data->map_size.width)
+        free(data->map_size.width);
+    free_cmap(data);
     free_textures_paths(data);
     free_cub_doc(data);
 }

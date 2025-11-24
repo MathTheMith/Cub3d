@@ -12,21 +12,19 @@
 
 #include "cub.h"
 
-void copy_all_doc(t_data *data, char *map_name, int *doc_height)
+void copy_all_doc(t_data *data, char *map_name, int doc_height)
 {
     int fd;
     int i;
     char *line;
 
     i = 0;
-    data->cub_doc = calloc(*doc_height + 1, sizeof(char *));
+    data->cub_doc = ft_calloc(doc_height + 1, sizeof(char *));
     if (!data->cub_doc)
-        return;
+        exit_program(data, E_malloc);
     open_map_file(data, map_name, &fd);
-    if (fd < 0)
-        return;
     line = get_next_line(fd);
-    while (line && i < *doc_height)
+    while (line && i < doc_height)
     {
         data->cub_doc[i] = line;
         i++;
@@ -35,7 +33,6 @@ void copy_all_doc(t_data *data, char *map_name, int *doc_height)
     if (line)
         free(line);
     data->cub_doc[i] = NULL;
-    get_next_line(-1);
     close(fd);
 }
 
@@ -50,11 +47,11 @@ void get_doc_size(int fd, int *doc_height, int *doc_width)
         tmp = ft_strlen(line);
         if (tmp > *doc_width)
             *doc_width = tmp;
-        free(line);
+        if (line)
+            free(line);
         line = get_next_line(fd);
         (*doc_height)++;
     }
-    get_next_line(-1);
 }
 
 int find_map_start(char **doc)

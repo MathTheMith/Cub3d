@@ -30,7 +30,8 @@ typedef enum e_error
 	E_mlx_env,
 	E_mlx_win,
 	E_tex,
-	E_map
+	E_map,
+	E_read
 }					t_error;
 
 typedef enum e_key
@@ -153,7 +154,7 @@ void				free_map(char **map);
 void transfer_cub_map(t_data *data, char *map_name);
 void get_map_size(t_data *data, t_map_size *map_size);
 int					find_map_start(char **doc);
-void				copy_all_doc(t_data *data, char *map_name, int *doc_height);
+void				copy_all_doc(t_data *data, char *map_name, int doc_height);
 void				open_map_file(t_data *data, char *map_name, int *fd);
 void				init_struct(t_data *data, t_map_size *size, char ***char_map_out);
 int					**fill_map(t_map_size *size, t_data *data);
