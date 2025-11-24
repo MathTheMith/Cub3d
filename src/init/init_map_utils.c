@@ -328,6 +328,7 @@ char **fill_char_map(t_map_size *map_size, t_data *data)
         }
         i++;
     }
+    free(data->line_exits);
     return (map);
 }
 

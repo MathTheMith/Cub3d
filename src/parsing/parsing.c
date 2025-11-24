@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 10:52:40 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 16:35:12 by tfournie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "cub.h"
 
@@ -65,31 +55,57 @@ void are_textures(t_data *data, char **textures_doc)
 		j++;
 	}
 }
-void get_map_textures(t_data *data, char ***cub_map)
+
+int get_map_textures(t_data *data, char ***textures_doc)
 {
     int start;
     int i;
 
     start = find_map_start(data->cub_doc);
 
-    *cub_map = malloc(sizeof(char *) * start + 1);
-    if (!*cub_map)
-        return;
+    *textures_doc = calloc(start + 1, sizeof(char *));
+    if (!*textures_doc)
+        return (0);
 
     i = 0;
     while (i < start)
     {
-        (*cub_map)[i] = ft_strdup(data->cub_doc[i]);
+        (*textures_doc)[i] = ft_strdup(data->cub_doc[i]);
+        if (!(*textures_doc)[i])
+        {
+          while (i > 0)
+                {
+                    i--;
+                    free((*textures_doc)[i]);
+                }
+                free(*textures_doc);
+          exit_program(data, E_malloc);
+        }
         i++;
     }
-	(*cub_map)[i] = NULL;
+	return (start);
 }
 
 void check_textures(t_data *data)
 {
     char **textures_doc;
-    get_map_textures(data, &textures_doc);
+	int i;
+	int len;
+	
+	textures_doc = NULL;
+    len = get_map_textures(data, &textures_doc);
 	are_textures(data, textures_doc);
+	if (textures_doc)
+    {
+        i = 0;
+        while (i < len)
+        {
+            free(textures_doc[i]);
+            i++;
+        }
+        free(textures_doc);
+        textures_doc = NULL;
+    }
 }
 
 
