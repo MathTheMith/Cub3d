@@ -69,7 +69,7 @@ static int loop_hook(t_data *data)
     draw_wall(data, &data->p);
 	// minimap(data);
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    // Debug position
+    // DEBUG
     // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
     return (0);
 }
