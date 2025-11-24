@@ -32,22 +32,6 @@ void init_window(t_data *data)
     data->data = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
 }
 
-void transfer_cub_map(t_data *data, char *map_name)
-{
-    int fd;
-    int doc_height;
-    int doc_width;
-
-    doc_height = 0;
-    doc_width = 0;
-    open_map_file(data, map_name, &fd);
-    if (fd < 0)
-        exit_program(data, E_path);
-    get_doc_size(fd, &doc_height, &doc_width);
-    copy_all_doc(data, map_name, &doc_height);
-    close(fd);
-}
-
 void init_struct(t_data *data, t_map_size *map_size, char ***char_map_out)
 {
 	data->map = convert_char_to_int_map(*char_map_out, map_size);

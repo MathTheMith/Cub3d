@@ -30,12 +30,44 @@ int update_fps(void)
     return fps;
 }
 
+void minimap(t_data *data)
+{
+	int m_y = 0;
+	int m_x = 0;
+	int size = SCREEN_W / 5;
+	while(m_x < size)
+	{
+		m_y = 0;
+		while (m_y < size)
+		{
+			put_pixel(data, m_x, m_y, 0xFF99FF);
+			m_y++;
+		}
+		m_x++;
+	}
+	int size_p = 10;
+	m_x = SCREEN_W / 10 - size_p;
+	m_y = SCREEN_W / 10 - size_p;
+	size = SCREEN_W / 10 + size_p;
+	while(m_x < size)
+	{
+		m_y = SCREEN_W / 10 - size_p;
+		while (m_y < size)
+		{
+			put_pixel(data, m_x, m_y, 0x000000FF);
+			m_y++;
+		}
+		m_x++;
+	}
+}
+
 static int loop_hook(t_data *data)
 {
 	update_fps();
     process_movement(data);
     draw_background(data, SCREEN_W, SCREEN_H);
     draw_wall(data, &data->p);
+	// minimap(data);
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
     // Debug position
     // printf("%.4f %.4f\n", data->p.p_x, data->p.p_y);
@@ -68,7 +100,6 @@ int main(int ac, char **av)
 	if (!data.mlx)
 		exit_program(&data, E_mlx_env);
 	parsing(ac, av, &data, &map_size);
-
 	init_struct(&data, &map_size, &data.char_map);
 	free_map(data.char_map);
 	game_loop(&data);

@@ -147,7 +147,6 @@ void				draw_line(t_data *data, int x0, int y0, int x1, int y1,
 void				draw_wall(t_data *data, t_player *p);
 void				draw_background(t_data *data, int width, int height);
 
-int					**init_map(t_data *data, t_map_size *size, char ***char_map_out);
 char				**duplicate_map(t_data *data, t_map_size *size);
 void				get_doc_size(int fd, int *doc_height, int *doc_width);
 void				free_map(char **map);
@@ -169,8 +168,7 @@ void				set_player_south(t_data *data, int i, int j);
 void				set_player_east(t_data *data, int i, int j);
 void				set_player_west(t_data *data, int i, int j);
 
-int					check_map(t_data *data, t_map_size *size, char **char_map);
-void check_map2(t_data *data, t_map_size *map_size, char *map_name);
+void				check_map(t_data *data, t_map_size *map_size, char *map_name);
 
 void				move_forward(t_data *data, double speed);
 void				move_backward(t_data *data, double speed);
