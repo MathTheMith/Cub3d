@@ -126,12 +126,3 @@ void print_int_map(int **map, t_map_size *map_size)
     }
     printf("---------------\n");
 }
-
-int **init_map(t_data *data, t_map_size *map_size)
-{
-    int **map;
-    get_map_size(data, map_size);
-    map = fill_map(map_size, data);
-    print_int_map(map, map_size);
-    return (map);
-}
