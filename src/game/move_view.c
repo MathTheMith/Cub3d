@@ -12,6 +12,24 @@
 
 #include "cub.h"
 
+void rotate_left(t_data *data)
+{
+    double rotSpeed;
+
+    rotSpeed = M_DPI * 100;
+    rotate_direction(&data->p, -rotSpeed);
+    rotate_plane(&data->p, -rotSpeed);
+}
+
+void rotate_right(t_data *data)
+{
+    double rotSpeed;
+
+    rotSpeed = M_DPI * 100;
+    rotate_direction(&data->p, rotSpeed);
+    rotate_plane(&data->p, rotSpeed);
+}
+
 void rotate_direction(t_player *p, double rotSpeed)
 {
     double oldDirX;
@@ -30,23 +48,6 @@ void rotate_plane(t_player *p, double rotSpeed)
     p->plane_y = oldPlaneX * sin(rotSpeed) + p->plane_y * cos(rotSpeed);
 }
 
-void rotate_left(t_data *data)
-{
-    double rotSpeed;
-
-    rotSpeed = M_DPI * 100;
-    rotate_direction(&data->p, -rotSpeed);
-    rotate_plane(&data->p, -rotSpeed);
-}
-
-void rotate_right(t_data *data)
-{
-    double rotSpeed;
-
-    rotSpeed = M_DPI * 100;
-    rotate_direction(&data->p, rotSpeed);
-    rotate_plane(&data->p, rotSpeed);
-}
 
 int	mouse_move(int x, int y, t_data *data)
 {

@@ -60,7 +60,9 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC_FILES:.c=.o))
 DEPS = $(OBJ:.o=.d)
 
-LIBFT_SRCS = $(wildcard $(LIBFT_DIR)/*.c)
+LIBFT_SRCS = $(wildcard $(LIBFT_DIR)/*.c) \
+			 $(wildcard $(LIBFT_DIR)/functions/*.c) \
+			 $(wildcard $(LIBFT_DIR)/functions/get_next_line/*.c)
 LIBFT_HDR = $(LIBFT_DIR)/libft.h
 
 # Colors
@@ -94,7 +96,7 @@ $(NAME): $(LIBFT) $(MLX_LIB) $(OBJ)
 	$(CC) $(OBJ) $(CFLAGS_RD) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "$(GREEN)The program is ready !$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_PATH)/%.c
+$(OBJ_DIR)/%.o: $(SRC_PATH)/%.c Makefile
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(LIBFT_INCLUDE) -I$(MLX_DIR) -c $< -o $@
 

@@ -46,8 +46,8 @@ static int loop_hook(t_data *data)
 void	game_loop(t_data *data)
 {
 	init_window(data);
-	hide_mouse(data);
-	lock_mouse(data);
+	// hide_mouse(data);
+	// lock_mouse(data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
