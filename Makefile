@@ -33,8 +33,11 @@ OBJ_DIR = build
 
 SRC_FILES = main.c \
 			\
+			game/raycasting/draw_wall_line_utils.c \
+			game/raycasting/draw_wall_line.c \
+			game/raycasting/init_raycasting.c \
+			game/raycasting/raycasting.c \
 			game/draw.c \
-			game/raycasting.c \
 			game/move_player.c \
 			game/move_view.c \
 			game/mouse_and_key.c \
