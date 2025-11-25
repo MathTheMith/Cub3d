@@ -98,15 +98,21 @@ void get_map_size(t_data *data, t_map_size *map_size)
         exit_program(data, E_malloc);
     
     i = start;
-    map_idx = 0;
     while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
     {
         len = ft_strlen(data->cub_doc[i]);
         if (len > 0 && data->cub_doc[i][len - 1] == '\n')
             len--;
-        map_size->width[map_idx] = len;
         if (len > data->map_size.max_width)
             data->map_size.max_width = len;
+
+        i++;
+    }
+    map_idx = start;
+    i = 0;
+    while (data->cub_doc[map_idx])
+    {
+        map_size->width[i] = data->map_size.max_width;
         map_idx++;
         i++;
     }

@@ -173,6 +173,7 @@ int	create_rgb(int r, int g, int b);
 char				**duplicate_map(t_data *data, t_map_size *size);
 void				get_doc_size(int fd, int *doc_height, int *doc_width);
 void				free_map(char **map);
+void print_map(char **map, t_map_size *map_size);
 void transfer_cub_map(t_data *data, char *map_name);
 void get_map_size(t_data *data, t_map_size *map_size);
 int					find_map_start(char **doc);
