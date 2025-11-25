@@ -74,7 +74,6 @@ char **allocate_char_map(t_map_size *map_size)
 {
     char **map;
     int i;
-    int j;
     int w;
 
     map = ft_calloc(map_size->height + 1, sizeof(char *));
@@ -95,13 +94,6 @@ char **allocate_char_map(t_map_size *map_size)
             free(map);
             return (NULL);
         }
-        j = 0;
-        while (j < w)
-        {
-            map[i][j] = '1';
-            j++;
-        }
-        map[i][j] = '\0';
         i++;
     }
     map[i] = NULL;
@@ -266,7 +258,7 @@ char **fill_char_map(t_map_size *map_size, t_data *data)
         fill_map_line(line, map, data, i, &player);
         i++;
     }
-    
+    print_map(map, map_size);
     if (!validate_map_with_flood_fill(map, map_size, data) || player != 1)
     {
         free_map(map);
