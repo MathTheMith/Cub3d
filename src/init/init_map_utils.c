@@ -1,4 +1,3 @@
-
 #include "cub.h"
 
 bool is_map_line(char *line)
@@ -19,12 +18,17 @@ bool is_map_line(char *line)
     return (true);
 }
 
-void process_map_char(char c, char **map, t_data *data, int i, int j)
+void process_map_char(char c, char **map, t_data *data, int i, int j, int *player)
 {
     int valid_char;
 
     valid_char = 0;
-    if (c == '1' || c == ' ')
+    if (c == ' ')
+    {
+        map[i][j] = ' ';
+        valid_char++;
+    }
+    if (c == '1')
     {
         map[i][j] = '1';
         valid_char++;
@@ -39,24 +43,28 @@ void process_map_char(char c, char **map, t_data *data, int i, int j)
         set_player_north(data, i, j);
         map[i][j] = '0';
         valid_char++;
+        (*player)++;
     }
     else if (c == 'S')
     {
         set_player_south(data, i, j);
         map[i][j] = '0';
         valid_char++;
+        (*player)++;
     }
     else if (c == 'E')
     {
         set_player_east(data, i, j);
         map[i][j] = '0';
         valid_char++;
+        (*player)++;
     }
     else if (c == 'W')
     {
         set_player_west(data, i, j);
         map[i][j] = '0';
         valid_char++;
+        (*player)++;
     }
     if (valid_char == 0)
         exit_program(data, E_map);
@@ -100,7 +108,7 @@ char **allocate_char_map(t_map_size *map_size)
     return (map);
 }
 
-void fill_map_line(char *line, char **map, t_data *data, int i, int width)
+void fill_map_line(char *line, char **map, t_data *data, int i, int *player)
 {
     int j;
     int len;
@@ -109,158 +117,130 @@ void fill_map_line(char *line, char **map, t_data *data, int i, int width)
     if (len > 0 && line[len - 1] == '\n')
         len--;
     j = 0;
-    while (j < width)
+    while (j < data->map_size.width[i])
     {
         if (j < len)
-            process_map_char(line[j], map, data, i, j);
-        else
-            map[i][j] = '1';
+            process_map_char(line[j], map, data, i, j, player);
         j++;
     }
 }
 
-void find_line_exits(char *line, t_line_exits *exits)
+bool flood_fill1(char **map, int i, int j, t_map_size *map_size)
 {
-    int i;
-    int len;
-
-    len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n')
-        len--;
-    exits->first_exit = -1;
-    exits->last_exit = -1;
-    i = 0;
-    while (i < len)
-    {
-        if (line[i] == '0' || line[i] == 'N' || line[i] == 'S'
-            || line[i] == 'E' || line[i] == 'W')
-        {
-            if (exits->first_exit == -1)
-                exits->first_exit = i;
-            exits->last_exit = i;
-        }
-        i++;
-    }
-}
-
-bool check_first_last_line(char *line)
-{
-    int i;
-
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] != '1' && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-            return (false);
-        i++;
-    }
-    return (true);
-}
-
-bool is_whitespace(char c)
-{
-    if (c == ' ' || c == '\t')
+    if (i < 0 || j < 0 || i >= map_size->height || j >= map_size->width[i])
+        return (false);
+    
+    if (map[i][j] == '1')
         return (true);
+    
+    if (map[i][j] == '2')
+        return (false);
+
+    if (map[i][j] == 'V')
+        return (true);
+    
+    if (map[i][j] == ' ')
+        return (false);
+    
+    if (map[i][j] == '0')
+    {
+        map[i][j] = 'V';
+        
+        if (!flood_fill1(map, i - 1, j, map_size))
+            return (false);
+        if (!flood_fill1(map, i + 1, j, map_size))
+            return (false);
+        if (!flood_fill1(map, i, j - 1, map_size))
+            return (false);
+        if (!flood_fill1(map, i, j + 1, map_size))
+            return (false);
+        
+        return (true);
+    }
+    
     return (false);
 }
 
-bool check_line_borders(char *line, t_line_exits *exits)
+void restore_visited_cells(char **map, t_map_size *map_size)
 {
-    int len;
     int i;
-
-    if (exits->first_exit == -1)
-        return (true);
-    len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n')
-        len--;
-    i = 0;
-    while (i < exits->first_exit && is_whitespace(line[i]))
-        i++;
-    if (i < exits->first_exit && line[i] != '1')
-        return (false);
-    if (exits->first_exit > 0 && !is_whitespace(line[exits->first_exit - 1])
-        && line[exits->first_exit - 1] != '1')
-        return (false);
-    if (exits->last_exit < len - 1)
-    {
-        if (line[exits->last_exit + 1] != '1'
-            && !is_whitespace(line[exits->last_exit + 1]))
-            return (false);
-        i = exits->last_exit + 1;
-        while (i < len && is_whitespace(line[i]))
-            i++;
-        if (i < len && line[i] != '1')
-            return (false);
-    }
-    return (true);
-}
-
-bool check_vertical_coverage(t_data *data, int curr_line, int start)
-{
-    t_line_exits *curr_exits;
-    t_line_exits *prev_exits;
-    t_line_exits *next_exits;
-    char *prev_line;
-    char *next_line;
     int j;
-    int len;
 
-    curr_exits = &data->line_exits[curr_line];
-    if (curr_exits->first_exit == -1)
-        return (true);
-    if (curr_line > 0)
+    i = 0;
+    while (i < map_size->height)
     {
-        prev_exits = &data->line_exits[curr_line - 1];
-        prev_line = data->cub_doc[start + curr_line - 1];
-        len = ft_strlen(prev_line);
-        if (len > 0 && prev_line[len - 1] == '\n')
-            len--;
-        j = curr_exits->first_exit;
-        while (j <= curr_exits->last_exit)
+        j = 0;
+        while (j < map_size->width[i])
         {
-            if (j >= len || is_whitespace(prev_line[j]))
-                return (false);
-            if (prev_exits->first_exit != -1
-                && (j < prev_exits->first_exit || j > prev_exits->last_exit))
-            {
-                if (prev_line[j] != '1')
-                    return (false);
-            }
+            if (map[i][j] == 'V')
+                map[i][j] = '0';
             j++;
         }
+        i++;
     }
-    if (curr_line < data->map_size.height - 1)
-    {
-        next_exits = &data->line_exits[curr_line + 1];
-        next_line = data->cub_doc[start + curr_line + 1];
-        len = ft_strlen(next_line);
-        if (len > 0 && next_line[len - 1] == '\n')
-            len--;
-        j = curr_exits->first_exit;
-        while (j <= curr_exits->last_exit)
-        {
-            if (j >= len || is_whitespace(next_line[j]))
-                return (false);
-            if (next_exits->first_exit != -1
-                && (j < next_exits->first_exit || j > next_exits->last_exit))
-            {
-                if (next_line[j] != '1')
-                    return (false);
-            }
-            j++;
-        }
-    }
-    return (true);
 }
 
-bool allocate_exits(t_data *data, t_map_size *map_size)
+bool validate_map_with_flood_fill(char **map, t_map_size *map_size, t_data *data)
 {
-    data->line_exits = ft_calloc(map_size->height, sizeof(t_line_exits));
-    if (!data->line_exits)
-        return (false);
+    int i;
+    int j;
+
+    (void)data;
+    i = 0;
+    while (i < map_size->height)
+    {
+        j = 0;
+        while (j < map_size->width[i])
+        {
+            if (map[i][j] == '0')
+            {
+                if (!flood_fill1(map, i, j, map_size))
+                {
+                    restore_visited_cells(map, map_size);
+                    return (false);
+                }
+            }
+            j++;
+        }
+        i++;
+    }
+    
+    restore_visited_cells(map, map_size);
     return (true);
 }
+
+char **add_walls(char **map, t_map_size *map_size)
+{
+    int i = 0;
+    int j = 0;
+    char **tmp_map;
+
+    tmp_map = malloc(map_size->height * sizeof(char *));
+    if (!tmp_map)
+        return (NULL);
+
+    while (i < map_size->height)
+    {
+
+        tmp_map[i] = malloc((map_size->width[i] + 1 + 1) * sizeof(char));
+        if (!tmp_map[i])
+            return (NULL);
+
+        j = 0;
+        while (j < map_size->width[i])
+        {
+            tmp_map[i][j] = map[i][j];
+            j++;
+        }
+        tmp_map[i][j] = '1';    
+        tmp_map[i][j+1] = '\0';
+        map_size->width[i]++;
+        i++;
+    }
+
+    return tmp_map;
+}
+
 
 char **fill_char_map(t_map_size *map_size, t_data *data)
 {
@@ -268,67 +248,31 @@ char **fill_char_map(t_map_size *map_size, t_data *data)
     int i;
     char *line;
     char **map;
+    int player;
 
+    player = 0;
     start = find_map_start(data->cub_doc);
     if (start == -1)
         return (NULL);
-    if (!allocate_exits(data, map_size))
-        return (NULL);
+    
     map = allocate_char_map(map_size);
     if (!map)
-    {
-        free(data->line_exits);
-        data->line_exits = NULL;
         return (NULL);
-    }
+    
     i = 0;
     while (i < map_size->height)
     {
         line = data->cub_doc[start + i];
-        find_line_exits(line, &data->line_exits[i]);
-        if (i == 0)
-        {
-            if (!check_first_last_line(line))
-            {
-                free_map(map);
-                exit_program(data, E_map);
-            }
-        }
-        else if (i == map_size->height - 1)
-        {
-            if (!check_first_last_line(line))
-            {
-                free_map(map);
-                exit_program(data, E_map);
-            }
-            if (!check_vertical_coverage(data, i, start))
-            {
-                free_map(map);
-                exit_program(data, E_map);
-            }
-        }
-        else
-        {
-            if (!check_line_borders(line, &data->line_exits[i]))
-            {
-                free_map(map);
-                exit_program(data, E_map);
-            }
-        }
-        fill_map_line(line, map, data, i, map_size->width[i]);
+        fill_map_line(line, map, data, i, &player);
         i++;
     }
-    i = 0;
-    while (i < map_size->height - 1)
+    
+    if (!validate_map_with_flood_fill(map, map_size, data) || player != 1)
     {
-        if (!check_vertical_coverage(data, i, start))
-        {
-            free_map(map);
-            exit_program(data, E_map);
-        }
-        i++;
+        free_map(map);
+        exit_program(data, E_map);
     }
-    free(data->line_exits);
+    map = add_walls(map, map_size);
     return (map);
 }
 
