@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:42:30 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 17:40:20 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 19:03:27 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	validate_and_parse_color(t_data *data, t_color_init *params)
 {
 	*(params->color_value) = parse_color_component(params->color_str,
 			params->rgb_length, params->is_last);
-	if (*(params->color_value) < 0 || *(params->color_value) >= 255)
+	if (*(params->color_value) < 0 || *(params->color_value) > 255)
 		exit_program(data, E_tex);
 }
 
@@ -44,14 +44,6 @@ static void	parse_floor_colors(t_data *data, t_color_init *params)
 	validate_and_parse_color(data, params);
 }
 
-static void	validate_color_strings(t_data *data, t_color_init *ceiling,
-								t_color_init *floor)
-{
-	if (ft_strlen(ceiling->orig_str) != *(ceiling->rgb_length)
-		|| ft_strlen(floor->orig_str) != *(floor->rgb_length))
-		exit_program(data, E_tex);
-}
-
 void	init_colors(t_data *data, size_t rgb_lenght_f, size_t rgb_lenght_c)
 {
 	t_color_init	ceiling;
@@ -71,5 +63,4 @@ void	init_colors(t_data *data, size_t rgb_lenght_f, size_t rgb_lenght_c)
 	floor.orig_str = data->path_textures.f;
 	parse_ceiling_colors(data, &ceiling);
 	parse_floor_colors(data, &floor);
-	validate_color_strings(data, &ceiling, &floor);
 }
