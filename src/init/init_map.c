@@ -36,12 +36,14 @@ void copy_all_doc(t_data *data, char *map_name, int doc_height)
     close(fd);
 }
 
-void get_doc_size(int fd, int *doc_height, int *doc_width)
+void get_doc_size(t_data *data, int fd, int *doc_height, int *doc_width)
 {
     char *line;
     int tmp;
 
     line = get_next_line(fd);
+    if (!line)
+        exit_program(data, E_map);
     while (line != NULL)
     {
         tmp = ft_strlen(line);
@@ -84,6 +86,8 @@ void get_map_size(t_data *data, t_map_size *map_size)
     int map_idx;
 
     start = find_map_start(data->cub_doc);
+    if (start == -1)
+        exit_program(data, E_map);
     i = start;
     data->map_size.max_width = ft_strlen(data->cub_doc[i]);
     

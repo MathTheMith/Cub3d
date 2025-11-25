@@ -16,7 +16,7 @@ void rotate_left(t_data *data)
 {
     double rotSpeed;
 
-    rotSpeed = M_DPI * 100;
+    rotSpeed = data->dpi * 100;
     rotate_direction(&data->p, -rotSpeed);
     rotate_plane(&data->p, -rotSpeed);
 }
@@ -25,7 +25,7 @@ void rotate_right(t_data *data)
 {
     double rotSpeed;
 
-    rotSpeed = M_DPI * 100;
+    rotSpeed = data->dpi * 100;
     rotate_direction(&data->p, rotSpeed);
     rotate_plane(&data->p, rotSpeed);
 }

@@ -23,7 +23,7 @@ void transfer_cub_map(t_data *data, char *map_name)
     open_map_file(data, map_name, &fd);
     if (fd < 0)
         exit_program(data, E_path);
-    get_doc_size(fd, &doc_height, &doc_width);
+    get_doc_size(data, fd, &doc_height, &doc_width);
     copy_all_doc(data, map_name, doc_height);
     close(fd);
 }

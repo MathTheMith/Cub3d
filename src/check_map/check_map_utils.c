@@ -11,9 +11,11 @@ void	free_map(char **map)
 	while (map[i])
 	{
 		free(map[i]);
+        map[i] = NULL;
 		i++;
 	}
 	free(map);
+    map = NULL;
 }
 
 int flood_fill(char **map, int x, int y, t_map_size *size)

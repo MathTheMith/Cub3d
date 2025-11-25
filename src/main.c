@@ -55,7 +55,7 @@ static int render_loop(t_data *data)
 void	game_loop(t_data *data)
 {
 	init_window(data);
-	mlx_mouse_hide(data->mlx, data->win);
+	// mlx_mouse_hide(data->mlx, data->win);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
@@ -77,7 +77,6 @@ int main(int ac, char **av)
 		exit_program(&data, E_mlx_env);
 	parsing(ac, av, &data, &map_size);
 	init_struct(&data, &map_size, &data.char_map);
-	print_int_map(data.map, &data.map_size);
 	game_loop(&data);
 	return (0);
 }

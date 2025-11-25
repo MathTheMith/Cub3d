@@ -41,5 +41,5 @@ void init_struct(t_data *data, t_map_size *map_size, char ***char_map_out)
 	}
 	init_textures(data);
 	data->last_mouse_x = SCREEN_W / 2;
-	data->dpi = M_DPI;
+	data->dpi = 0.0006;
 }
