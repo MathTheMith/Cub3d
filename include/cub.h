@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:00:23 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:00:38 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:51:43 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,17 @@ typedef struct s_teximg
 	int				endian;
 }					t_teximg;
 
+typedef struct s_wall_calc
+{
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	wall_x;
+	int		tex_x;
+	double	step;
+	double	tex_pos;
+}	t_wall_calc;
+
 typedef struct s_map_size
 {
 	int				*width;
@@ -167,6 +178,22 @@ typedef struct s_ray
 	int				side;
 	double			perp_wall_dist;
 }					t_ray;
+
+typedef struct s_render_ctx
+{
+	t_data		*data;
+	t_teximg	*tex;
+	t_ray		*ray;
+	int			x;
+}	t_render_ctx;
+
+unsigned int    get_texel(t_teximg *tex, int x, int y);
+void init_ray_direction(t_ray *ray, t_player *p, int x);
+void init_ray_delta(t_ray *ray);
+void init_ray_step(t_ray *ray, t_player *p);
+void	calculate_wall_dimensions(t_wall_calc *calc, t_ray *ray);
+void	draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x);
+t_teximg *get_wall_texture(t_data *data, t_ray *ray);
 
 int					key_hook(int keycode, t_data *data);
 void				put_pixel(t_data *data, int x, int y, int color);
