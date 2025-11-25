@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 12:08:53 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 12:33:17 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:56:44 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	minimap(t_data *data)
 
 	m.view_distance = 10;
 	m.grid_size = m.view_distance * 2;
-	m.cell_size = (SCREEN_W / 5) / m.grid_size;
+	m.cell_size = (1500 / 5) / m.grid_size;
 	m.start_x = (int)data->p.p_x - m.view_distance;
 	m.start_y = (int)data->p.p_y - m.view_distance;
 	m.color_floor = create_rgb(data->colors.RC, data->colors.GC,

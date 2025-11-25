@@ -5,49 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/20 13:02:42 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/20 13:02:42 by tfournie         ###   ########.fr       */
+/*   Created: 2025/11/25 15:13:45 by tfournie          #+#    #+#             */
+/*   Updated: 2025/11/25 15:15:03 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void rotate_left(t_data *data)
+void	rotate_left(t_data *data)
 {
-    double rotSpeed;
+	double	rot_speed;
 
-    rotSpeed = data->dpi * 100;
-    rotate_direction(&data->p, -rotSpeed);
-    rotate_plane(&data->p, -rotSpeed);
+	rot_speed = data->dpi * 100;
+	rotate_direction(&data->p, -rot_speed);
+	rotate_plane(&data->p, -rot_speed);
 }
 
-void rotate_right(t_data *data)
+void	rotate_right(t_data *data)
 {
-    double rotSpeed;
+	double	rot_speed;
 
-    rotSpeed = data->dpi * 100;
-    rotate_direction(&data->p, rotSpeed);
-    rotate_plane(&data->p, rotSpeed);
+	rot_speed = data->dpi * 100;
+	rotate_direction(&data->p, rot_speed);
+	rotate_plane(&data->p, rot_speed);
 }
 
-void rotate_direction(t_player *p, double rotSpeed)
+void	rotate_direction(t_player *p, double rot_speed)
 {
-    double oldDirX;
+	double	old_dirx;
 
-    oldDirX = p->dir_x;
-    p->dir_x = p->dir_x * cos(rotSpeed) - p->dir_y * sin(rotSpeed);
-    p->dir_y = oldDirX * sin(rotSpeed) + p->dir_y * cos(rotSpeed);
+	old_dirx = p->dir_x;
+	p->dir_x = p->dir_x * cos(rot_speed) - p->dir_y * sin(rot_speed);
+	p->dir_y = old_dirx * sin(rot_speed) + p->dir_y * cos(rot_speed);
 }
 
-void rotate_plane(t_player *p, double rotSpeed)
+void	rotate_plane(t_player *p, double rot_speed)
 {
-    double oldPlaneX;
+	double	old_planex;
 
-    oldPlaneX = p->plane_x;
-    p->plane_x = p->plane_x * cos(rotSpeed) - p->plane_y * sin(rotSpeed);
-    p->plane_y = oldPlaneX * sin(rotSpeed) + p->plane_y * cos(rotSpeed);
+	old_planex = p->plane_x;
+	p->plane_x = p->plane_x * cos(rot_speed) - p->plane_y * sin(rot_speed);
+	p->plane_y = old_planex * sin(rot_speed) + p->plane_y * cos(rot_speed);
 }
-
 
 int	mouse_move(int x, int y, t_data *data)
 {
@@ -56,17 +55,15 @@ int	mouse_move(int x, int y, t_data *data)
 	double	rot;
 
 	(void)y;
-	center_x = SCREEN_W / 2;
+	center_x = 1500 / 2;
 	delta = x - data->last_mouse_x;
 	if (delta != 0)
 	{
 		rot = delta * data->dpi;
 		rotate_direction(&data->p, rot);
 		rotate_plane(&data->p, rot);
-		mlx_mouse_move(data->mlx, data->win, center_x, SCREEN_H / 2);
+		mlx_mouse_move(data->mlx, data->win, center_x, 1000 / 2);
 		data->last_mouse_x = center_x;
 	}
 	return (0);
 }
-
-
