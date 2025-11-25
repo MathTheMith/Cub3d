@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:25:17 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 16:57:40 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/25 17:36:05 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	check_line(t_data *data, char *line)
 		&& (line[i + 2] == ' ' || line[i + 2] == '\t'))
 	{
 		i += 2;
-		data->path_textures.NO = extract_path(line, i);
+		data->path_textures.no = extract_path(line, i);
 		return ;
 	}
 	if (line[i] == 'F' && (line[i + 1] == ' ' || line[i + 1] == '\t'))
 	{
 		i++;
-		data->path_textures.F = extract_path(line, i);
+		data->path_textures.f = extract_path(line, i);
 		return ;
 	}
 	if (line[i] == 'C' && (line[i + 1] == ' ' || line[i + 1] == '\t'))
 	{
 		i++;
-		data->path_textures.C = extract_path(line, i);
+		data->path_textures.c = extract_path(line, i);
 	}
 }
 
@@ -70,10 +70,7 @@ void	validate_and_add_walls(char ***map, t_map_size *map_size,
 {
 	if (!validate_map_with_flood_fill(*map, map_size, data)
 		|| data->count_player != 1)
-	{
-		free_map(*map);
 		exit_program(data, E_map);
-	}
 	*map = add_walls(data, *map, map_size);
 }
 

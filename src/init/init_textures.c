@@ -1,27 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_textures.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 17:27:09 by tfournie          #+#    #+#             */
+/*   Updated: 2025/11/25 17:32:53 by tfournie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub.h"
 
 bool	check_line_text(t_data *data, char *line, int *i)
 {
-	if (line[*i] == 'S' && line[*i + 1] == 'O'
-		&& (line[*i + 2] == ' ' || line[*i + 2] == '\t'))
+	if (line[*i] == 'S' && line[*i + 1] == 'O' && (line[*i + 2] == ' '
+			|| line[*i + 2] == '\t'))
 	{
 		*i += 2;
-		data->path_textures.SO = extract_path(line, *i);
+		data->path_textures.so = extract_path(line, *i);
 		return (0);
 	}
-	if (line[*i] == 'W' && line[*i + 1] == 'E'
-		&& (line[*i + 2] == ' ' || line[*i + 2] == '\t'))
+	if (line[*i] == 'W' && line[*i + 1] == 'E' && (line[*i + 2] == ' '
+			|| line[*i + 2] == '\t'))
 	{
 		*i += 2;
-		data->path_textures.WE = extract_path(line, *i);
+		data->path_textures.we = extract_path(line, *i);
 		return (0);
 	}
-	if (line[*i] == 'E' && line[*i + 1] == 'A'
-		&& (line[*i + 2] == ' ' || line[*i + 2] == '\t'))
+	if (line[*i] == 'E' && line[*i + 1] == 'A' && (line[*i + 2] == ' '
+			|| line[*i + 2] == '\t'))
 	{
 		*i += 2;
-		data->path_textures.EA = extract_path(line, *i);
+		data->path_textures.ea = extract_path(line, *i);
 		return (0);
 	}
 	return (1);
@@ -36,16 +47,16 @@ static void	put_teximg(t_data *data, int *i)
 	y = 32;
 	if (*i == 0)
 		data->teximg[*i].img = mlx_xpm_file_to_image(data->mlx,
-				data->path_textures.NO, &x, &y);
+				data->path_textures.no, &x, &y);
 	else if (*i == 1)
 		data->teximg[*i].img = mlx_xpm_file_to_image(data->mlx,
-				data->path_textures.SO, &x, &y);
+				data->path_textures.so, &x, &y);
 	else if (*i == 2)
 		data->teximg[*i].img = mlx_xpm_file_to_image(data->mlx,
-				data->path_textures.WE, &x, &y);
+				data->path_textures.we, &x, &y);
 	else if (*i == 3)
 		data->teximg[*i].img = mlx_xpm_file_to_image(data->mlx,
-				data->path_textures.EA, &x, &y);
+				data->path_textures.ea, &x, &y);
 }
 
 void	init_teximg(t_data *data, int i)
@@ -55,10 +66,8 @@ void	init_teximg(t_data *data, int i)
 		exit_program(data, E_tex);
 	data->teximg[i].width = 32;
 	data->teximg[i].height = 32;
-	data->teximg[i].px = (unsigned int *)mlx_get_data_addr(
-			data->teximg[i].img,
-			&data->teximg[i].bpp,
-			&data->teximg[i].line_len,
+	data->teximg[i].px = (unsigned int *)mlx_get_data_addr(data->teximg[i].img,
+			&data->teximg[i].bpp, &data->teximg[i].line_len,
 			&data->teximg[i].endian);
 }
 

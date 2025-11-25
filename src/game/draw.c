@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:10:28 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:10:32 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:40:20 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ void	draw_background(t_data *data, int width, int height)
 
 	y_start = 0;
 	y_end = height / 2;
-	color_floor = create_rgb(data->colors.RF, data->colors.GF, data->colors.BF);
-	color_ceiling = create_rgb(data->colors.RC, data->colors.GC,
-			data->colors.BC);
+	color_floor = create_rgb(data->colors.rf, data->colors.gf, data->colors.bf);
+	color_ceiling = create_rgb(data->colors.rc, data->colors.gc,
+			data->colors.bc);
 	while (y_start < y_end)
 	{
 		fill_line(data, y_start, width, color_floor);

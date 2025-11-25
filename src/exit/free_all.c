@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:07:51 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:08:18 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:34:12 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 static void	free_textures_paths(t_data *data)
 {
-	if (data->path_textures.NO)
+	if (data->path_textures.no)
 	{
-		free(data->path_textures.NO);
-		data->path_textures.NO = NULL;
+		free(data->path_textures.no);
+		data->path_textures.no = NULL;
 	}
-	if (data->path_textures.SO)
+	if (data->path_textures.so)
 	{
-		free(data->path_textures.SO);
-		data->path_textures.SO = NULL;
+		free(data->path_textures.so);
+		data->path_textures.so = NULL;
 	}
-	if (data->path_textures.WE)
+	if (data->path_textures.we)
 	{
-		free(data->path_textures.WE);
-		data->path_textures.WE = NULL;
+		free(data->path_textures.we);
+		data->path_textures.we = NULL;
 	}
-	if (data->path_textures.EA)
+	if (data->path_textures.ea)
 	{
-		free(data->path_textures.EA);
-		data->path_textures.EA = NULL;
+		free(data->path_textures.ea);
+		data->path_textures.ea = NULL;
 	}
 }
 
 static void	free_colors_paths(t_data *data)
 {
-	if (data->path_textures.F)
+	if (data->path_textures.f)
 	{
-		free(data->path_textures.F);
-		data->path_textures.F = NULL;
+		free(data->path_textures.f);
+		data->path_textures.f = NULL;
 	}
-	if (data->path_textures.C)
+	if (data->path_textures.c)
 	{
-		free(data->path_textures.C);
-		data->path_textures.C = NULL;
+		free(data->path_textures.c);
+		data->path_textures.c = NULL;
 	}
 }
 
