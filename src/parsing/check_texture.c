@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:26:38 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 16:28:12 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:28:47 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	starts_with(const char *line, const char *token)
 }
 
 static void	check_all_textures_found(t_data *data, char **textures_doc,
-				int *found)
+		int *found)
 {
 	int	j;
 
@@ -37,8 +37,7 @@ static void	check_all_textures_found(t_data *data, char **textures_doc,
 	}
 }
 
-static void	mark_texture_found(t_data *data, char *line, char **tokens,
-				int *found)
+static bool	mark_texture_found(char *line, char **tokens, int *found)
 {
 	int	j;
 
@@ -48,12 +47,13 @@ static void	mark_texture_found(t_data *data, char *line, char **tokens,
 		if (starts_with(line, tokens[j]))
 		{
 			if (found[j] == 1)
-				exit_program(data, E_tex);
+				return (false);
 			found[j] = 1;
 			break ;
 		}
 		j++;
 	}
+	return (true);
 }
 
 void	are_textures(t_data *data, char **textures_doc)
@@ -74,7 +74,11 @@ void	are_textures(t_data *data, char **textures_doc)
 	i = 0;
 	while (textures_doc[i])
 	{
-		mark_texture_found(data, textures_doc[i], tokens, found);
+		if (mark_texture_found(textures_doc[i], tokens, found) == false)
+		{
+			free_map(textures_doc);
+			exit_program(data, E_malloc);
+		}
 		i++;
 	}
 	check_all_textures_found(data, textures_doc, found);

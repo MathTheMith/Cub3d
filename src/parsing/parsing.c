@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:24:05 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 16:27:10 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:50:43 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	get_map_textures(t_data *data, char ***textures_doc)
 	int	i;
 
 	start = find_map_start(data->cub_doc);
-	*textures_doc = calloc(start + 1, sizeof(char *));
+	*textures_doc = ft_calloc(start + 1, sizeof(char *));
 	if (!*textures_doc)
 		exit_program(data, E_malloc);
 	i = 0;
