@@ -111,19 +111,3 @@ int	**allocate_int_map(t_map_size *map_size)
 	}
 	return (int_map);
 }
-// void	print_int_map(int **map, t_map_size *map_size)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	printf("\n----- MAP INT -----\n");
-// 	for (i = 0; i < map_size->height; i++)
-// 	{
-// 		for (j = 0; j < map_size->width[i]; j++)
-// 		{
-// 			printf("%d", map[i][j]);
-// 		}
-// 		printf("\n");
-// 	}
-// 	printf("---------------\n");
-// }
