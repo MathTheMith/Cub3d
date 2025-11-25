@@ -137,6 +137,15 @@ typedef struct s_line_exits
 	int				last_exit;
 }					t_line_exits;
 
+typedef struct s_color_init
+{
+	char	**color_str;
+	size_t	*rgb_length;
+	int		*color_value;
+	int		is_last;
+	char	*orig_str;
+}	t_color_init;
+
 typedef struct s_data
 {
 	void			*mlx;
@@ -150,6 +159,7 @@ typedef struct s_data
 	char			**char_map;
 	char			**cub_doc;
 	int				last_mouse_x;
+	int				count_player;
 	double			dpi;
 	int				key[KEY_COUNT];
 	int				screen_w;
@@ -161,6 +171,14 @@ typedef struct s_data
 	t_colors		colors;
 	t_line_exits	*line_exits;
 }					t_data;
+
+typedef struct s_render_ctx
+{
+	t_data		*data;
+	t_teximg	*tex;
+	t_ray		*ray;
+	int			x;
+}	t_render_ctx;
 
 typedef struct s_ray
 {
@@ -179,13 +197,27 @@ typedef struct s_ray
 	double			perp_wall_dist;
 }					t_ray;
 
-typedef struct s_render_ctx
-{
-	t_data		*data;
-	t_teximg	*tex;
-	t_ray		*ray;
-	int			x;
-}	t_render_ctx;
+
+
+int	**allocate_int_map(t_map_size *map_size);
+void	fill_int_map_line(char **char_map, int **int_map,
+								t_map_size *map_size, int i);
+char	**allocate_tmp_map(t_data *data, char **map, t_map_size *map_size);
+char	*allocate_line(t_data *data, char **map, char **tmp_map, int i);
+void	copy_and_add_wall(char **map, char **tmp_map,
+							t_map_size *map_size, int i);
+bool	validate_map_with_flood_fill(char **map, t_map_size *map_size,
+		t_data *data);
+char	**add_walls(t_data *data, char **map, t_map_size *map_size);
+char	**allocate_char_map(t_map_size *map_size);
+void	fill_map_line(char *line, t_data *data, int i);
+char	*extract_path(char *line, int i);
+void	add_path_textures(t_data *data);
+bool	check_line_text(t_data *data, char *line, int *i);
+void	validate_and_add_walls(char ***map, t_map_size *map_size,
+									t_data *data);
+void	free_int_map_on_error(int **int_map, int lines_allocated);
+int		parse_color_component(char **str, size_t *rgb_lenght, bool last);
 
 unsigned int    get_texel(t_teximg *tex, int x, int y);
 void init_ray_direction(t_ray *ray, t_player *p, int x);
@@ -194,6 +226,7 @@ void init_ray_step(t_ray *ray, t_player *p);
 void	calculate_wall_dimensions(t_wall_calc *calc, t_ray *ray);
 void	draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x);
 t_teximg *get_wall_texture(t_data *data, t_ray *ray);
+
 
 int					key_hook(int keycode, t_data *data);
 void				put_pixel(t_data *data, int x, int y, int color);
@@ -220,7 +253,7 @@ char				**fill_char_map(t_map_size *size, t_data *data);
 int					**convert_char_to_int_map(char **char_map,
 						t_map_size *size);
 void				init_textures(t_data *data);
-void				init_c_colors(t_data *data);
+void				init_colors(t_data *data, size_t gb_lenght_f, size_t rgb_lenght_c);
 void				init_window(t_data *data);
 
 void				set_player_north(t_data *data, int i, int j);

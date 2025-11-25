@@ -86,6 +86,7 @@ int	main(int ac, char **av)
 		exit_program(&data, E_mlx_env);
 	parsing(ac, av, &data, &map_size);
 	init_struct(&data, &map_size, &data.char_map);
+	// print_map(data.char_map, &data.map_size);
 	game_loop(&data);
 	return (0);
 }

@@ -1,0 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_size.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 16:03:20 by mvachon           #+#    #+#             */
+/*   Updated: 2025/11/25 16:22:47 by mvachon          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub.h"
+
+static int	is_map_a_line(char *line)
+{
+	int	j;
+
+	j = 0;
+	while (line[j] == ' ')
+		j++;
+	return (line[j] == '1' || line[j] == '0');
+}
+
+static int	count_map_height(char **cub_doc, int start)
+{
+	int	i;
+	int	height;
+
+	i = start;
+	height = 0;
+	while (cub_doc[i] && is_map_a_line(cub_doc[i]))
+	{
+		height++;
+		i++;
+	}
+	return (height);
+}
+
+static int	calculate_max_width(char **cub_doc, int start)
+{
+	int	i;
+	int	len;
+	int	max_width;
+
+	i = start;
+	max_width = ft_strlen(cub_doc[i]);
+	while (cub_doc[i] && is_map_a_line(cub_doc[i]))
+	{
+		len = ft_strlen(cub_doc[i]);
+		if (len > 0 && cub_doc[i][len - 1] == '\n')
+			len--;
+		if (len > max_width)
+			max_width = len;
+		i++;
+	}
+	return (max_width);
+}
+
+static void	fill_width_array(int *width, int height, int max_width)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		width[i] = max_width;
+		i++;
+	}
+}
+
+void	get_map_size(t_data *data, t_map_size *map_size)
+{
+	int	start;
+
+	start = find_map_start(data->cub_doc);
+	if (start == -1)
+		exit_program(data, E_map);
+	data->map_size.max_width = ft_strlen(data->cub_doc[start]);
+	map_size->height = count_map_height(data->cub_doc, start);
+	map_size->width = ft_calloc(map_size->height, sizeof(int));
+	if (!map_size->width)
+		exit_program(data, E_malloc);
+	data->map_size.max_width = calculate_max_width(data->cub_doc, start);
+	fill_width_array(map_size->width, map_size->height,
+		data->map_size.max_width);
+	data->map_size.height = map_size->height;
+	data->map_size.width = map_size->width;
+}

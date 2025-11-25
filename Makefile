@@ -43,10 +43,15 @@ SRC_FILES = main.c \
 			game/mouse_and_key.c \
 			game/minimap.c \
 			\
-			init/init_map.c \
+			init/init_map/init_map.c \
+			init/init_map/map_parser.c \
+			init/init_map/map_validation.c \
+			init/init_map/init_map_utils.c \
+			init/init_map/get_map_size.c \
+			\
 			init/init_player_direction.c \
-			init/init_map_utils.c \
 			init/init_textures.c \
+			init/init_textures_utils.c \
 			init/init_colors.c \
 			init/init.c \
 			\
