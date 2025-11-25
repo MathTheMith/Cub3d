@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 15:01:20 by tfournie          #+#    #+#             */
+/*   Updated: 2025/11/25 15:01:23 by tfournie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub.h"
 #include <sys/time.h>
@@ -11,45 +21,45 @@ size_t	get_current_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-int update_fps(void)
+int	update_fps(void)
 {
-    static size_t last_time = 0;
-    static int frame_count = 0;
-    static int fps = 0;
+	static size_t	last_time = 0;
+	static int		frame_count = 0;
+	static int		fps = 0;
+	size_t			current_time;
 
-    size_t current_time = get_current_time();
-    frame_count++;
-
-    if (current_time - last_time >= 1000)
-    {
-        fps = frame_count;
-        frame_count = 0;
-        last_time = current_time;
-        printf("FPS: %d\n", fps);
-    }
-    return fps;
+	current_time = get_current_time();
+	frame_count++;
+	if (current_time - last_time >= 1000)
+	{
+		fps = frame_count;
+		frame_count = 0;
+		last_time = current_time;
+		printf("FPS: %d\n", fps);
+	}
+	return (fps);
 }
 
-static int render_loop(t_data *data)
+static int	render_loop(t_data *data)
 {
-    static long last_time = 0;
-    struct timeval tv;
-    long now;
-	int f_time;
+	static long		last_time = 0;
+	struct timeval	tv;
+	long			now;
+	int				f_time;
 
 	f_time = 1000000 / 60;
-    gettimeofday(&tv, NULL);
-    now = tv.tv_sec * 1000000 + tv.tv_usec;
-    if (now - last_time < f_time)
-        return (0);
-    last_time = now;
+	gettimeofday(&tv, NULL);
+	now = tv.tv_sec * 1000000 + tv.tv_usec;
+	if (now - last_time < f_time)
+		return (0);
+	last_time = now;
 	update_fps();
-    process_movement(data);
-	draw_background(data, SCREEN_W, SCREEN_H);
-    draw_wall(data, &data->p);
+	process_movement(data);
+	draw_background(data, 1500, 1000);
+	draw_wall(data, &data->p);
 	minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    return (0);
+	return (0);
 }
 
 void	game_loop(t_data *data)
@@ -64,14 +74,13 @@ void	game_loop(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data		data;
 	t_map_size	map_size;
 
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_memset(&map_size, 0, sizeof(t_map_size));
-
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		exit_program(&data, E_mlx_env);

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tfournie                                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 16:30:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/11/18 20:00:00 by tfournie         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub.h"
 
@@ -26,7 +15,7 @@ unsigned int    get_texel(t_teximg *tex, int x, int y)
 
 void init_ray_direction(t_ray *ray, t_player *p, int x)
 {
-    ray->camera_x = 2 * x / (double)SCREEN_W - 1;
+    ray->camera_x = 2 * x / (double)1500 - 1;
     ray->dir_x = p->dir_x + p->plane_x * ray->camera_x;
     ray->dir_y = p->dir_y + p->plane_y * ray->camera_x;
 
@@ -131,13 +120,13 @@ void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
     t_teximg *tex;
     int tex_x;
 
-    line_height = (int)(SCREEN_H / ray->perp_wall_dist);
-    draw_start = -line_height / 2 + SCREEN_H / 2;
-    draw_end = line_height / 2 + SCREEN_H / 2;
+    line_height = (int)(1000 / ray->perp_wall_dist);
+    draw_start = -line_height / 2 + 1000 / 2;
+    draw_end = line_height / 2 + 1000 / 2;
     if (draw_start < 0)
         draw_start = 0;
-    if (draw_end >= SCREEN_H)
-        draw_end = SCREEN_H - 1;
+    if (draw_end >= 1000)
+        draw_end = 1000 - 1;
     tex = get_wall_texture(data, ray);
 
     // ----- Compute exact hit point -----
@@ -156,7 +145,7 @@ void draw_wall_line(t_data *data, t_ray *ray, t_player *p, int x)
 
     // ----- Vertical texture stepping -----
     double step = 1.0 * tex->height / line_height;
-    int offset = draw_start - (SCREEN_H >> 1) + (line_height >> 1);
+    int offset = draw_start - (1000 >> 1) + (line_height >> 1);
     double tex_pos = offset * step;
 
     // if (x % 100000 == 0)
@@ -198,7 +187,7 @@ void draw_wall(t_data *data, t_player *p)
     int x = 0;
     t_ray ray;
 
-    while (x < SCREEN_W)
+    while (x < 1500)
     {
         init_ray_direction(&ray, p, x);
         init_ray_delta(&ray);

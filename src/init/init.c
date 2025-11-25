@@ -24,10 +24,10 @@ void open_map_file(t_data *data, char *map_name, int *fd)
 
 void init_window(t_data *data)
 {
-    data->win = mlx_new_window(data->mlx, SCREEN_W, SCREEN_H, "Cub3D");
+    data->win = mlx_new_window(data->mlx, 1500, 1000, "Cub3D");
     if (data->win == NULL)
         exit_program(data, E_mlx_win);
-    data->img = mlx_new_image(data->mlx, SCREEN_W, SCREEN_H);
+    data->img = mlx_new_image(data->mlx, 1500, 1000);
     data->data = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
 }
 
@@ -40,6 +40,6 @@ void init_struct(t_data *data, t_map_size *map_size, char ***char_map_out)
 		exit_program(data, E_map);
 	}
 	init_textures(data);
-	data->last_mouse_x = SCREEN_W / 2;
+	data->last_mouse_x = 1500 / 2;
 	data->dpi = 0.0006;
 }
