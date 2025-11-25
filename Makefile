@@ -33,8 +33,11 @@ OBJ_DIR = build
 
 SRC_FILES = main.c \
 			\
+			game/raycasting/draw_wall_line_utils.c \
+			game/raycasting/draw_wall_line.c \
+			game/raycasting/init_raycasting.c \
+			game/raycasting/raycasting.c \
 			game/draw.c \
-			game/raycasting.c \
 			game/move_player.c \
 			game/move_view.c \
 			game/mouse_and_key.c \
@@ -52,10 +55,9 @@ SRC_FILES = main.c \
 			init/init_colors.c \
 			init/init.c \
 			\
-			check_map/check_map.c \
-			check_map/check_map_utils.c \
-			\
 			parsing/parsing.c \
+			parsing/check_map.c\
+			parsing/check_texture.c\
 			\
 			exit/exit_program.c \
 			exit/free_all.c \
