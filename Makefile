@@ -38,6 +38,7 @@ SRC_FILES = main.c \
 			game/move_player.c \
 			game/move_view.c \
 			game/mouse_and_key.c \
+			game/minimap.c \
 			\
 			init/init_map.c \
 			init/init_player_direction.c \

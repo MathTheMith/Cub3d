@@ -85,6 +85,7 @@ void get_map_size(t_data *data, t_map_size *map_size)
 
     start = find_map_start(data->cub_doc);
     i = start;
+    data->map_size.max_width = ft_strlen(data->cub_doc[i]);
     
     while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
     {
@@ -104,6 +105,8 @@ void get_map_size(t_data *data, t_map_size *map_size)
         if (len > 0 && data->cub_doc[i][len - 1] == '\n')
             len--;
         map_size->width[map_idx] = len;
+        if (len > data->map_size.max_width)
+            data->map_size.max_width = len;
         map_idx++;
         i++;
     }

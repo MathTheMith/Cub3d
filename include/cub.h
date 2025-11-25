@@ -47,6 +47,26 @@ typedef enum e_key
 	KEY_COUNT
 }					t_key;
 
+typedef struct s_square
+{
+    int x;
+    int y;
+    int size;
+    int color;
+}   t_square;
+
+typedef struct s_minimap
+{
+    int view_distance;
+    int grid_size;
+    int cell_size;
+    int start_x;
+    int start_y;
+    int color_floor;
+    int color_void;
+    int color_player;
+}   t_minimap;
+
 typedef struct s_player
 {
 	double			p_x;
@@ -82,6 +102,7 @@ typedef struct s_teximg
 typedef struct s_map_size
 {
 	int				*width;
+	int				max_width;
 	int				height;
 }					t_map_size;
 
@@ -147,6 +168,7 @@ void				draw_line(t_data *data, int x0, int y0, int x1, int y1,
 						int color);
 void				draw_wall(t_data *data, t_player *p);
 void				draw_background(t_data *data, int width, int height);
+int	create_rgb(int r, int g, int b);
 
 char				**duplicate_map(t_data *data, t_map_size *size);
 void				get_doc_size(int fd, int *doc_height, int *doc_width);
@@ -194,5 +216,7 @@ void				free_all(t_data *data);
 void				print_error(t_error error);
 
 void				print_int_map(int **map, t_map_size *map_size);
+
+void minimap(t_data *data);
 
 #endif
