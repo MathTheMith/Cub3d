@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:00:23 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:51:43 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:27:47 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,7 @@ int					key_press(int keycode, t_data *data);
 int					close_window(t_data *data);
 
 void				parsing(int ac, char **av, t_data *data, t_map_size *map);
+void	are_textures(t_data *data, char **textures_doc);
 void				exit_program(t_data *data, t_error error);
 void				free_all(t_data *data);
 void				print_error(t_error error);
