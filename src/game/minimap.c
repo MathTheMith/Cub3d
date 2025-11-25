@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 12:08:53 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 12:09:46 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:33:17 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ static int	get_cell_color(t_data *data, t_minimap *m, int dx, int dy)
 	if (map_y >= 0 && map_y < data->map_size.height && map_x >= 0
 		&& map_x < data->map_size.max_width)
 	{
-		if (data->char_map[map_y][map_x] == '1')
-			return (0x000000);
-		return (m->color_floor);
+		if (data->char_map[map_y][map_x] == '0')
+			return (m->color_floor);
+		return (m->color_void);
 	}
 	return (-1);
 }

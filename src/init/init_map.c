@@ -105,7 +105,6 @@ void get_map_size(t_data *data, t_map_size *map_size)
             len--;
         if (len > data->map_size.max_width)
             data->map_size.max_width = len;
-
         i++;
     }
     map_idx = start;
@@ -116,7 +115,6 @@ void get_map_size(t_data *data, t_map_size *map_size)
         map_idx++;
         i++;
     }
-    
     data->map_size.height = map_size->height;
     data->map_size.width = map_size->width;
 }
