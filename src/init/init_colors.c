@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:51:29 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/24 14:03:22 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/25 14:37:40 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int parse_color_component(char **str, size_t *rgb_lenght, bool last)
 {
     int value = 0;
 
+    if (!ft_isdigit(**str))
+        return (-1);
     while (**str && ft_isdigit(**str))
     {
         value = value * 10 + (**str - '0');
@@ -27,7 +29,7 @@ static int parse_color_component(char **str, size_t *rgb_lenght, bool last)
         (*str)++;
         *rgb_lenght+=1;
     }
-    return value;
+    return (value);
 }
 
 void init_c_colors(t_data *data)

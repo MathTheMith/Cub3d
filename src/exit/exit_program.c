@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:01:15 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/19 10:49:58 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:03:07 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,20 @@ void exit_program(t_data *data, t_error error)
     if (error == No_error)
     {
         if (data)
+        {
             free_all(data);
-        destroy_mlx(data);
+            destroy_mlx(data);
+        }
         exit(EXIT_SUCCESS);
     }
     else 
     {
         print_error(error);
         if (data)
+        {
             free_all(data);
-        destroy_mlx(data);
+            destroy_mlx(data);
+        }
         exit(EXIT_FAILURE);
     }
 }

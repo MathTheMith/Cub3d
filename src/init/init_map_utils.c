@@ -124,9 +124,6 @@ bool flood_fill1(char **map, int i, int j, t_map_size *map_size)
     
     if (map[i][j] == '1')
         return (true);
-    
-    if (map[i][j] == '2')
-        return (false);
 
     if (map[i][j] == 'V')
         return (true);
@@ -201,7 +198,7 @@ bool validate_map_with_flood_fill(char **map, t_map_size *map_size, t_data *data
     return (true);
 }
 
-char **add_walls(char **map, t_map_size *map_size)
+char **add_walls(t_data *data, char **map, t_map_size *map_size)
 {
     int i = 0;
     int j = 0;
@@ -209,14 +206,25 @@ char **add_walls(char **map, t_map_size *map_size)
 
     tmp_map = malloc(map_size->height * sizeof(char *));
     if (!tmp_map)
-        return (NULL);
-
+    {
+        free_map(map);
+        exit_program(data, E_malloc);
+    }
     while (i < map_size->height)
     {
 
-        tmp_map[i] = malloc((map_size->width[i] + 1 + 1) * sizeof(char));
+        tmp_map[i] = malloc((map_size->width[i] + 2) * sizeof(char));
         if (!tmp_map[i])
-            return (NULL);
+        {
+            while (i > 0)
+            {
+                i--;
+                free(tmp_map[i]);
+            }
+            free(tmp_map);
+            data->char_map = map;
+            exit_program(data, E_malloc);
+        }
 
         j = 0;
         while (j < map_size->width[i])
@@ -224,13 +232,17 @@ char **add_walls(char **map, t_map_size *map_size)
             tmp_map[i][j] = map[i][j];
             j++;
         }
+        free(map[i]);
+        map[i] = NULL;
         tmp_map[i][j] = '1';    
         tmp_map[i][j+1] = '\0';
         map_size->width[i]++;
         i++;
     }
+    free(map);
+    map = NULL;
 
-    return tmp_map;
+    return (tmp_map);
 }
 
 
@@ -249,7 +261,7 @@ char **fill_char_map(t_map_size *map_size, t_data *data)
     
     map = allocate_char_map(map_size);
     if (!map)
-        return (NULL);
+        exit_program(data, E_malloc);
     
     i = 0;
     while (i < map_size->height)
@@ -258,13 +270,12 @@ char **fill_char_map(t_map_size *map_size, t_data *data)
         fill_map_line(line, map, data, i, &player);
         i++;
     }
-    print_map(map, map_size);
     if (!validate_map_with_flood_fill(map, map_size, data) || player != 1)
     {
         free_map(map);
         exit_program(data, E_map);
     }
-    map = add_walls(map, map_size);
+    map = add_walls(data, map, map_size);
     return (map);
 }
 

@@ -51,7 +51,10 @@ void are_textures(t_data *data, char **textures_doc)
 	while (j < 6)
 	{
 		if (found[j] == 0)
+		{
+			free_map(textures_doc);
 			exit_program(data, E_tex);
+		}
 		j++;
 	}
 }
@@ -65,7 +68,7 @@ int get_map_textures(t_data *data, char ***textures_doc)
 
     *textures_doc = calloc(start + 1, sizeof(char *));
     if (!*textures_doc)
-        return (0);
+        exit_program(data, E_malloc);
 
     i = 0;
     while (i < start)

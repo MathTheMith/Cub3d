@@ -1,7 +1,7 @@
 
 F 240,240,240
 
-C 135,206,235
+C 0,0,0
         
 NO ./textures/Wall_bricks_N.xpm
 SO ./textures/Wall_bricks_S.xpm

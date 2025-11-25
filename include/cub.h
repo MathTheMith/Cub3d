@@ -15,9 +15,7 @@
 
 # define SCREEN_W 1500
 # define SCREEN_H 1000
-# define M_DPI 0.0006
 # define P_SPEED 0.03
-# define SCREEN_CUT 1
 
 typedef enum e_error
 {
@@ -137,6 +135,8 @@ typedef struct s_data
 	int				last_mouse_x;
 	double			dpi;
 	int				key[KEY_COUNT];
+	int				screen_w;
+	int				screen_h;
 	t_map_size		map_size;
 	t_teximg		teximg[4];
 	t_path_textures	path_textures;
@@ -171,7 +171,7 @@ void				draw_background(t_data *data, int width, int height);
 int	create_rgb(int r, int g, int b);
 
 char				**duplicate_map(t_data *data, t_map_size *size);
-void				get_doc_size(int fd, int *doc_height, int *doc_width);
+void				get_doc_size(t_data *data, int fd, int *doc_height, int *doc_width);
 void				free_map(char **map);
 void print_map(char **map, t_map_size *map_size);
 void transfer_cub_map(t_data *data, char *map_name);
@@ -207,8 +207,6 @@ int					mouse_move(int x, int y, t_data *data);
 void				process_movement(t_data *data);
 int					key_release(int keycode, t_data *data);
 int					key_press(int keycode, t_data *data);
-void				hide_mouse(t_data *data);
-void				lock_mouse(t_data *data);
 int					close_window(t_data *data);
 
 void				parsing(int ac, char **av, t_data *data, t_map_size *map);
