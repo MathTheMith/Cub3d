@@ -12,39 +12,6 @@
 
 #include "cub.h"
 
-char **duplicate_char_map(char **original, t_map_size *size)
-{
-    int     i;
-    int     j;
-    char    **copy;
-
-    copy = malloc(sizeof(char *) * (size->height + 1));
-    if (!copy)
-        return (NULL);
-    i = 0;
-    while (i < size->height)
-    {
-        copy[i] = malloc(sizeof(char) * (size->width[i] + 1));
-        if (!copy[i])
-        {
-            while (--i >= 0)
-                free(copy[i]);
-            free(copy);
-            return (NULL);
-        }
-        j = 0;
-        while (j < size->width[i])
-        {
-            copy[i][j] = original[i][j];
-            j++;
-        }
-        copy[i][j] = '\0';
-        i++;
-    }
-    copy[size->height] = NULL;
-    return (copy);
-}
-
 void transfer_cub_map(t_data *data, char *map_name)
 {
     int fd;
