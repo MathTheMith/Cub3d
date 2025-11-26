@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 18:05:23 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 18:07:53 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:22:22 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ typedef enum e_error
 	E_mlx_win,
 	E_tex,
 	E_map,
-	E_read
+	E_maps,
+	E_mapc,
+	E_read,
+	E_color
 }	t_error;
 
 typedef enum e_key

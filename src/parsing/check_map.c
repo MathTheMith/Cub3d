@@ -6,7 +6,7 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:59:53 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 16:20:26 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:26:02 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	check_map(t_data *data, t_map_size *map_size, char *map_name)
 	get_map_size(data, map_size);
 	data->char_map = fill_char_map(map_size, data);
 	if (!data->char_map)
-		exit_program(data, E_map);
+		exit_program(data, E_maps);
 }
 
 void	free_map(char **map)
