@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:01:15 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:02:09 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:09:37 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "mlx.h"
+#include <stdlib.h>
 
 void	destroy_mlx(t_data *data)
 {

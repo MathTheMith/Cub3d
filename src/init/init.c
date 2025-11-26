@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
+#include <fcntl.h>
+#include "mlx.h"
 
 int	parse_color_component(char **str, size_t *rgb_lenght, bool last)
 {

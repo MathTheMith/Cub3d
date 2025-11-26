@@ -6,11 +6,12 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:03:20 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/26 10:27:40 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
 
 static int	is_map_a_line(char *line)
 {

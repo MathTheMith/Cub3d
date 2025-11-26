@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   draw_wall_line.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:35:13 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:50:58 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <math.h>
 
 static double	get_wall_x_position(t_ray *ray, t_player *p)
 {

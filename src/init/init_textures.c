@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:27:09 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 17:32:53 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "mlx.h"
 
 bool	check_line_text(t_data *data, char *line, int *i)
 {

@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 10:50:09 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 17:48:39 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:30:56 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <limits.h>
-# include <stdint.h>
-# include <stdlib.h>
 # include <unistd.h>
 
 long	ft_atoi(const char *theString);

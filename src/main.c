@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:01:20 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 17:29:42 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:26 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include <sys/time.h>
+#include "mlx.h"
+#include "../libft/libft.h"
 
 size_t	get_current_time(void)
 {

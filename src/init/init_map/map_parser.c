@@ -6,11 +6,13 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:45:44 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/26 10:22:11 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
+#include <stdlib.h>
 
 void	process_map_char(char c, t_data *data,
 		int i, int j)

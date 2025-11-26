@@ -6,11 +6,12 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:39:47 by tfournie          #+#    #+#             */
-/*   Updated: 2025/10/02 12:34:10 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:28:41 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static int	ft_count(int n)
 {

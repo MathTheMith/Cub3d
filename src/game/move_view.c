@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:13:45 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:15:03 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <math.h>
+#include "mlx.h"
 
 void	rotate_left(t_data *data)
 {

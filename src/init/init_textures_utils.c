@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_textures_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:25:17 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 17:36:05 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
 
 void	check_line(t_data *data, char *line)
 {
