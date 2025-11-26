@@ -43,7 +43,7 @@ void	get_doc_size(t_data *data, int fd, int *doc_height, int *doc_width)
 
 	line = get_next_line(fd);
 	if (!line)
-		exit_program(data, E_map);
+		exit_program(data, E_malloc);
 	while (line != NULL)
 	{
 		tmp = ft_strlen(line);
