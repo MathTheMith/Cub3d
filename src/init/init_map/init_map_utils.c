@@ -6,11 +6,12 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:12:56 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 16:29:21 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:06:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <stdlib.h>
 
 char	**allocate_tmp_map(t_data *data, char **map, t_map_size *map_size)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 int	ft_atoll_safe_finish(int sign, unsigned long long result, long long *out)
 {

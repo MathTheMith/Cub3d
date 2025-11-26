@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:59:53 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 16:20:26 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:09:02 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 void	transfer_cub_map(t_data *data, char *map_name)
 {

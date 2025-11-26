@@ -6,17 +6,13 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 18:05:23 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 18:07:53 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:30:52 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
 
-# include "../libft/libft.h"
-# include "mlx.h"
-# include <fcntl.h>
-# include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 

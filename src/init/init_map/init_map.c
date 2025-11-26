@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
+#include <stdlib.h>
 
 void	copy_all_doc(t_data *data, char *map_name, int doc_height)
 {

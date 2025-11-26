@@ -6,11 +6,12 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:42:30 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/25 19:03:27 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "../libft/libft.h"
 
 static void	validate_and_parse_color(t_data *data, t_color_init *params)
 {

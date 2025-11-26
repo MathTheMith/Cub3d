@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 11:07:51 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 17:34:12 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:09:59 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+#include <stdlib.h>
 
 static void	free_textures_paths(t_data *data)
 {
