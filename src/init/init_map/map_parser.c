@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:45:44 by mvachon           #+#    #+#             */
 /*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
@@ -32,7 +32,7 @@ void	process_map_char(char c, t_data *data,
 		data->count_player++;
 	}
 	if (valid_char == 0)
-		exit_program(data, E_map);
+		exit_program(data, E_mapc);
 }
 
 char	**allocate_char_map(t_map_size *map_size)

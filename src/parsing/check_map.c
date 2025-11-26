@@ -37,7 +37,7 @@ void	check_map(t_data *data, t_map_size *map_size, char *map_name)
 	get_map_size(data, map_size);
 	data->char_map = fill_char_map(map_size, data);
 	if (!data->char_map)
-		exit_program(data, E_map);
+		exit_program(data, E_maps);
 }
 
 void	free_map(char **map)

@@ -6,11 +6,13 @@
 /*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:03:15 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/25 15:06:16 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/26 10:23:41 by tfournie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+static void	print_error_next(t_error error);
 
 void	print_error(t_error error)
 {
@@ -35,7 +37,19 @@ void	print_error(t_error error)
 		printf(" of the wall is invalid(check the file or the path)!\n");
 	}
 	else if (error == E_map)
-		printf("Error\nType: E_map\nThe map isn't valid\n");
-	else if (error == E_read)
-		printf("Error\nType: E_read\n\n");
+		printf("Error\nType: E_map\nThe map isn't valid!\n");
+	else
+		print_error_next(error);
+}
+
+static void	print_error_next(t_error error)
+{
+	if (error == E_read)
+		printf("Error\nType: E_read\nCannot read the document!\n");
+	else if (error == E_color)
+		printf("Error\nType: E_color\nWrong number for the color of F or C!\n");
+	else if (error == E_maps)
+		printf("Error\nType: E_maps\nCouldn't find the map!\n");
+	else if (error == E_mapc)
+		printf("Error\nType: E_maps\nWrong character in map!\n");
 }

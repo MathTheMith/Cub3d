@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:03:20 by mvachon           #+#    #+#             */
 /*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
@@ -76,7 +76,7 @@ void	get_map_size(t_data *data, t_map_size *map_size)
 
 	start = find_map_start(data->cub_doc);
 	if (start == -1)
-		exit_program(data, E_map);
+		exit_program(data, E_maps);
 	data->map_size.max_width = ft_strlen(data->cub_doc[start]);
 	map_size->height = count_map_height(data->cub_doc, start);
 	map_size->width = ft_calloc(map_size->height, sizeof(int));
