@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:26:38 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/27 10:08:25 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static bool	mark_texture_found(char *line, char **tokens, int *found)
 	int	j;
 
 	j = 0;
+	while (line[j] == ' ' || line[j] == '\t')
+		j++;
+	if (line[j] == '\0' || line[j] == '\n')
+		return (true);
+	j = 0;
 	while (j < 6)
 	{
 		if (starts_with(line, tokens[j]))
@@ -50,11 +55,11 @@ static bool	mark_texture_found(char *line, char **tokens, int *found)
 			if (found[j] == 1)
 				return (false);
 			found[j] = 1;
-			break ;
+			return (true);
 		}
 		j++;
 	}
-	return (true);
+	return (false);
 }
 
 void	are_textures(t_data *data, char **textures_doc)
@@ -78,7 +83,7 @@ void	are_textures(t_data *data, char **textures_doc)
 		if (mark_texture_found(textures_doc[i], tokens, found) == false)
 		{
 			free_map(textures_doc);
-			exit_program(data, E_malloc);
+			exit_program(data, E_mapc);
 		}
 		i++;
 	}
