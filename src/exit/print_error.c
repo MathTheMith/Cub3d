@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:03:15 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:23:41 by tfournie         ###   ########.fr       */
+/*   Updated: 2025/11/27 10:06:17 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ static void	print_error_next(t_error error)
 	else if (error == E_maps)
 		printf("Error\nType: E_maps\nCouldn't find the map!\n");
 	else if (error == E_mapc)
-		printf("Error\nType: E_maps\nWrong character in map!\n");
+		printf("Error\nType: E_maps\nWrong character in the doc!\n");
 }
