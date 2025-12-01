@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 18:05:23 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/26 10:30:52 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/27 10:37:34 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ void			open_map_file(t_data *data, char *map_name, int *fd);
 int				**allocate_int_map(t_map_size *map_size);
 void			fill_int_map_line(char **char_map, int **int_map,
 					t_map_size *map_size, int i);
+void			fill_width_array(int *width, int height, int max_width);
 char			**allocate_char_map(t_map_size *map_size);
 void			fill_map_line(char *line, t_data *data, int i);
 char			**fill_char_map(t_map_size *size, t_data *data);
