@@ -15,6 +15,28 @@
 #include <fcntl.h>
 #include "mlx.h"
 
+static int	validate_separator(char **str, size_t *rgb_lenght, bool last)
+{
+	if (!last)
+	{
+		if (**str != ',')
+			return (-1);
+		(*str)++;
+		*rgb_lenght += 1;
+	}
+	else
+	{
+		while (**str == ' ' || **str == '\t')
+		{
+			(*str)++;
+			*rgb_lenght += 1;
+		}
+		if (**str != '\0' && **str != '\n')
+			return (-1);
+	}
+	return (0);
+}
+
 int	parse_color_component(char **str, size_t *rgb_lenght, bool last)
 {
 	int	value;
@@ -28,11 +50,10 @@ int	parse_color_component(char **str, size_t *rgb_lenght, bool last)
 		(*str)++;
 		*rgb_lenght += 1;
 	}
-	if (**str == ',' && last == 0)
-	{
-		(*str)++;
-		*rgb_lenght += 1;
-	}
+	if (value > 255)
+		return (-1);
+	if (validate_separator(str, rgb_lenght, last) == -1)
+		return (-1);
 	return (value);
 }
 

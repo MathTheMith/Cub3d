@@ -1,12 +1,11 @@
 
-NO ./textures/Wall_bricks_N.xpm
-
 C 135,206,235
-WE ./textures/Wall_bricks_W.xpm
+F 140,140,140
 
+NO ./textures/Wall_bricks_N.xpm
+WE ./textures/Wall_bricks_W.xpm
 SO ./textures/Wall_bricks_S.xpm
 EA ./textures/Wall_bricks_E.xpm
-F 140,140,140
 
 11111111111111111111111111111
     1000000000110000010000001
@@ -22,4 +21,3 @@ F 140,140,140
 11000001110101011111011110N01
 11111111111101011101111010001
 11111111111111111111111111111
-
