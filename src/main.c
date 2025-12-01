@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 15:01:20 by tfournie          #+#    #+#             */
-/*   Updated: 2025/11/26 10:29:26 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/12/01 11:47:18 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	render_loop(t_data *data)
 	long			now;
 	int				f_time;
 
-	f_time = 1000000 / 60;
+	f_time = 1000000 / 120;
 	gettimeofday(&tv, NULL);
 	now = tv.tv_sec * 1000000 + tv.tv_usec;
 	if (now - last_time < f_time)
