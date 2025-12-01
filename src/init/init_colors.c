@@ -3,15 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   init_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tfournie <tfournie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:42:30 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/26 10:29:19 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/27 10:37:13 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include "../libft/libft.h"
+
+void	fill_width_array(int *width, int height, int max_width)
+{
+	int	i;
+
+	i = 0;
+	while (i < height)
+	{
+		width[i] = max_width;
+		i++;
+	}
+}
 
 static void	validate_and_parse_color(t_data *data, t_color_init *params)
 {

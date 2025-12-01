@@ -6,7 +6,7 @@
 /*   By: mvachon <mvachon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 16:03:20 by mvachon           #+#    #+#             */
-/*   Updated: 2025/11/27 10:06:47 by mvachon          ###   ########.fr       */
+/*   Updated: 2025/11/27 10:36:45 by mvachon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,21 @@ static int	is_map_a_line(char *line)
 	j = 0;
 	while (line[j] == ' ')
 		j++;
-	return (line[j] == '1');
+	if (line[j] == '1')
+		return (1);
+	if (j != 0)
+	{
+		if (line[j] == '\n' && line[j - 1] == ' ')
+			return (1);
+	}
+	return (0);
 }
 
 static int	count_map_height(t_data *data, int start)
 {
 	int		i;
 	int		height;
-	
+
 	i = start;
 	height = 0;
 	while (data->cub_doc[i] && is_map_a_line(data->cub_doc[i]))
@@ -74,18 +81,6 @@ static int	calculate_max_width(char **cub_doc, int start)
 		i++;
 	}
 	return (max_width);
-}
-
-static void	fill_width_array(int *width, int height, int max_width)
-{
-	int	i;
-
-	i = 0;
-	while (i < height)
-	{
-		width[i] = max_width;
-		i++;
-	}
 }
 
 void	get_map_size(t_data *data, t_map_size *map_size)
