@@ -70,7 +70,7 @@ sudo apt-get install libxext-dev libx11-dev libbsd-dev
 
 ```bash
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/cub3D.git
+git clone https://github.com/MathTheMith/cub3D.git
 cd cub3D
 
 # Build (MiniLibX is cloned and compiled automatically)
@@ -124,7 +124,7 @@ C 135,206,235
 
 ## 👥 Authors
 
-- **Mathéo Vachon** — [@mvachon](https://github.com/YOUR_USERNAME) — *École 42 Lyon*
+- **Mathéo Vachon** — [@mvachon](https://github.com/MathTheMith) — *École 42 Lyon*
 - **tfournie** — *École 42*
 
 ---
